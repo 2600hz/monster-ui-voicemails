@@ -1,0 +1,83 @@
+<div class="received-voicemails-container empty">
+	<div class="action-bar clearfix">
+		<div class="filters basic-actions pull-left">
+			<div class="select-voicemails-wrapper monster-select-dropdown pull-left">
+				<li class="dropdown">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+						{{#monsterCheckbox}}
+							<input class="main-select-message" type="checkbox"/>
+						{{/monsterCheckbox}}
+						<i class="icon-telicon-caret-down"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0);" class="select-some-messages" data-type="all">{{ i18n.voicemails.receivedVMs.actionBar.select.all }}</a></li>
+						<li><a href="javascript:void(0);" class="select-some-messages" data-type="new">{{ i18n.voicemails.receivedVMs.actionBar.select.new }}</a></li>
+						<li><a href="javascript:void(0);" class="select-some-messages" data-type="saved">{{ i18n.voicemails.receivedVMs.actionBar.select.listened }}</a></li>
+						<li><a href="javascript:void(0);" class="select-some-messages" data-type="deleted">{{ i18n.voicemails.receivedVMs.actionBar.select.deleted }}</a></li>
+						<li><a href="javascript:void(0);" class="select-some-messages" data-type="none">{{ i18n.voicemails.receivedVMs.actionBar.select.none }}</a></li>
+					</ul>
+				</li>
+			</div>
+
+			<div class="filters selected-actions pull-left margin-left">
+				<div class="mark-as-wrapper hidden monster-select-dropdown pull-left">
+					<li class="dropdown">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+							<i class="icon-telicon-prioritize"></i>
+							<i class="icon-telicon-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:void(0);" class="mark-as-link" data-type="new">{{ i18n.voicemails.receivedVMs.actionBar.markAsNew }}</a></li>
+							<li><a href="javascript:void(0);" class="mark-as-link" data-type="saved">{{ i18n.voicemails.receivedVMs.actionBar.markAsListened }}</a></li>
+							<li><a href="javascript:void(0);" class="mark-as-link" data-type="deleted">{{ i18n.voicemails.receivedVMs.actionBar.markAsDeleted }}</a></li>
+						</ul>
+					</li>
+				</div>
+			</div>
+		</div>
+
+		<div class="filters vmbox-selector">
+			<select id="select_vmbox">
+				<option value="none"></option>
+				{{#each vmboxes}}
+					<option value="{{id}}">{{name}}</option>
+				{{/each}}
+			</select>
+
+			<button id="refresh_voicemails" class="monster-button-secondary monster-button-fit margin-left">
+				<i class="fa fa-refresh"></i>
+			</button>
+		</div>
+
+		<div class="filters search pull-right">
+			<!-- <div class="custom-range pull-left">
+				<span>{{i18n.voicemails.receivedVMs.actionBar.from}}:</span>
+				<input id="startDate" type="text" class="date-filter filter-from">
+				<span>{{i18n.voicemails.receivedVMs.actionBar.to}}:</span>
+				<input id="endDate" type="text" class="date-filter filter-to">
+				<button type="button" class="apply-filter monster-button monster-button-fit" title="{{i18n.callLogs.applyFilter}}"></button>
+			</div> -->
+
+			<div class="search-div pull-left">
+				<span class="search-box">
+					<i class="fa fa-search"></i>
+					<input id="filter_voicemail" type="text" class="search-query" placeholder="{{i18n.table.search}}">
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="empty-state">
+			<i class="icon-title icon-telicon-voicemail"></i>
+			<div class="headline">{{ i18n.voicemails.receivedVMs.empty.headline }}</div>
+			<div class="subtitle">{{ i18n.voicemails.receivedVMs.empty.subtitle }}</div>
+		</div>
+		<div class="data-state">
+
+		</div>
+		<div class="loading-state">
+			<i class="fa fa-spin fa-spinner monster-blue"></i>
+		</div>
+	</div>
+</div>

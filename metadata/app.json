@@ -1,0 +1,28 @@
+{
+	"name": "voicemails",
+	"i18n": {
+		"en-US": {
+			"label": "Voicemail Manager",
+			"description": "The Voicemail Manager lets you browse your users voicemails boxes and manage their voicemails.",
+			"extended_description": "",
+			"features": [
+			]
+		}
+	},
+	"tags": [
+		"reseller"
+	],
+	"icon": "",
+	"api_url": "http://10.26.0.41:8000/v2",
+	"author": "2600Hz",
+	"version": "1.0",
+	"license": "-", 
+	"price": 0,
+	"screenshots": [
+	],
+	"urls": {
+		"documentation": "{documentation_url}",
+		"howto": "{howto_video_url}"
+	},
+	"pvt_type": "app"
+}

@@ -1,0 +1,51 @@
+{
+	"voicemails": {
+		"title": "Voicemail Manager",
+		"menuTitles": {
+			"receivedVMs": "Received Voicemails"
+		},
+		"receivedVMs": {
+			"table": {
+				"columns": {
+					"status": "Status",
+					"callId": "Call ID",
+					"received": "Received",
+					"from": "From",
+					"targetNumber": "Target Number",
+					"duration": "Duration"
+				},
+				"emptyRow": "There are no messages stored in the selected Voicemail Box"
+			},
+			"empty": {
+				"headline": "In order to view and manage voicemails, first select the desired voicemail box in this account.",
+				"subtitle": "Use the 'Select a Voicemail Box' above and to the left."
+			},
+			"actionBar": {
+				"select": {
+					"all": "All on page",
+					"new": "New",
+					"listened": "Listened",
+					"deleted": "Deleted",
+					"none": "None"
+				},
+				"selectVM": {
+					"none": "Select a Voicemail Box"
+				},
+				"from": "From",
+				"to": "To",
+				"markAsNew": "Mark as New",
+				"markAsListened": "Mark as Listened",
+				"markAsDeleted": "Mark as Deleted"
+			},
+			"status": {
+				"saved": "Listened",
+				"deleted": "Deleted",
+				"new": "New"
+			},
+			"noCDR": "We didn't find any corresponding CDR to this message. It is possible that the logs have been deleted from the system if this is an old message.",
+			"CDRPopup": {
+				"title": "CDR Details"
+			}
+		}
+	}
+}

@@ -1,0 +1,168 @@
+/* Default empty state */
+.received-voicemails-container.empty .empty-state {
+	display: block;
+}
+
+.received-voicemails-container .empty-state {
+	background: #FFF;
+	border: 1px dashed #ccc;
+	display: none;
+	padding: 0 10px 40px;
+	text-align: center;
+}
+
+.received-voicemails-container .empty-state .icon-title {
+	color: #333;
+	font-size: 148px;
+}
+
+.received-voicemails-container .empty-state .headline {
+	margin-top: -10px;
+}
+
+.received-voicemails-container .empty-state .subtitle {
+	margin-top :10px;
+	color: #909099;
+}
+
+.received-voicemails-container .data-state {
+	display: none;
+}
+
+.received-voicemails-container .loading-state {
+	display: none;
+	    background: #fff none repeat scroll 0 0;
+	border: 1px dashed #aaa;
+	font-size: 60px;
+	padding: 50px;
+	text-align: center;
+}
+
+
+/* Action Bar */
+.received-voicemails-container.empty .filters.search,
+.received-voicemails-container.empty .filters.basic-actions > *,
+.received-voicemails-container.empty #refresh_voicemails {
+	display: none;
+}
+
+.received-voicemails-container .filters.basic-actions {
+	display: inline-block;
+	width: 200px;
+}
+
+.received-voicemails-container .action-bar {
+	margin-bottom: 25px;
+}
+
+.received-voicemails-container .action-bar .filters > :first-child {
+	margin-left: 0;
+}
+
+.received-voicemails-container .action-bar .margin-left {
+	margin-left: 10px;
+}
+
+.received-voicemails-container .action-bar .vmbox-selector {
+	display: inline-block;
+}
+
+.received-voicemails-container .action-bar #select_voicemails {
+	width: 105px;
+	margin-bottom: 0;
+}
+
+.received-voicemails-container .action-bar .mark-as-wrapper {
+	display: inline-block;
+}
+
+.received-voicemails-container .action-bar .mark-as-wrapper.hidden {
+	display: none;
+}
+
+.received-voicemails-container .action-bar .custom-range > * {
+	margin: 0 10px 0 0;
+	vertical-align: middle;
+}
+
+.received-voicemails-container .action-bar .custom-range > span {
+	margin-right: 5px;
+}
+
+.received-voicemails-container .action-bar .custom-range input.date-filter {
+	height: 24px;
+	width: 80px;
+}
+
+/* Table */
+.received-voicemails-container .voicemails-table tbody tr > td:first-child .monster-checkbox {
+	margin-right: 10px;
+	margin-top: 8px;
+}
+
+.received-voicemails-container .voicemails-table table.highlighted tbody tr {
+	opacity: 0.3;
+}
+
+.received-voicemails-container .voicemails-table table.highlighted tbody tr.active {
+	opacity: 1;
+}
+
+.received-voicemails-container .voicemails-table .status {
+	text-transform: uppercase;
+}
+
+.received-voicemails-container .voicemails-table .status[data-folder="new"] {
+	color: #33DB24;
+	font-weight: bold;
+}
+
+.received-voicemails-container .voicemails-table .status[data-folder="saved"] {
+	color: #AAA;
+}
+
+.received-voicemails-container .voicemails-table .status[data-folder="deleted"] {
+	color: #e01a00;
+}
+
+.received-voicemails-container .voicemails-table .select-line {
+	cursor: pointer;
+}
+
+.received-voicemails-container .voicemails-table .empty-vm-row td {
+	text-align: center !important;
+}
+
+/* Fixing the width to make the transition smoother when playing a file */
+.received-voicemails-container .voicemails-table .actions {
+	width: 128px;
+}
+
+/* Voicemail Player */
+.received-voicemails-container .voicemails-table .voicemail-player {
+	width: 175px;
+}
+
+.received-voicemails-container .voicemails-table .close-player {
+	cursor: pointer;
+}
+
+.received-voicemails-container .voicemails-table .voicemail-player audio {
+	width: 170px;
+}
+
+.received-voicemails-container .voicemails-table .voicemail-player .close-player {
+	border: 1px solid #aaa;
+	border-radius: 0 4px 4px 0;
+	color: #888;
+	float: right;
+	font-weight: bold;
+	margin: 0;
+	padding: 3px 12px;
+}
+
+/* CDR Popup */
+#voicemails_cdr_details_dialog {
+	width: 750px;
+	margin: 15px;
+}
