@@ -3,8 +3,6 @@ define(function(require){
 		_ = require('underscore'),
 		monster = require('monster'),
 		footable = require('footable'),
-		footableFilter = require('footable-filter'),
-		footableSort = require('footable-sort'),
 		chosen = require('chosen');
 
 	var app = {

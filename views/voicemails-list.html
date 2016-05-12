@@ -1,15 +1,15 @@
 <div class="voicemails-table">
-	<table class="monster-table footable" data-filter="#filter_voicemail">
+	<table class="monster-table footable" data-filtering="true" data-sorting="true" data-paging="true" data-paging-size="5">
 		<thead>
 			<tr>
-				<th data-sort-ignore="true"></th>
+				<th data-type="html" data-sort-ignore="true"></th>
 				<th>{{ i18n.voicemails.receivedVMs.table.columns.status }}</th>
 				<!--<th>{{ i18n.voicemails.receivedVMs.table.columns.callId }}</th>-->
-				<th>{{ i18n.voicemails.receivedVMs.table.columns.received }}</th>
+				<th data-type="numeric" data-sort-initial="true">{{ i18n.voicemails.receivedVMs.table.columns.received }}</th>
 				<th>{{ i18n.voicemails.receivedVMs.table.columns.from }}</th>
 				<th>{{ i18n.voicemails.receivedVMs.table.columns.targetNumber }}</th>
-				<th>{{ i18n.voicemails.receivedVMs.table.columns.duration }}</th>
-				<th data-sort-ignore="true"><!--  ACTIONS  --></th>
+				<th data-breakpoints="xs">{{ i18n.voicemails.receivedVMs.table.columns.duration }}</th>
+				<th data-type="html" data-sort-ignore="true"><!--  ACTIONS  --></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,7 +22,7 @@
 				</td>
 				<td class="status select-line" data-folder="{{folder}}">{{tryI18n @root.i18n.voicemails.receivedVMs.status folder}}</td>
 				<!--<td class="select-line">{{call_id}}</td>-->
-				<td class="select-line">{{toFriendlyDate timestamp}}</td>
+				<td class="select-line" data-value="{{timestamp}}">{{toFriendlyDate timestamp}}</td>
 				<td class="select-line">{{formatted.from}}</td>
 				<td class="select-line">{{formatted.to}}</td>
 				<td class="duration select-line">{{formatted.duration}}</td>
