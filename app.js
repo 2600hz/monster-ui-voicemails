@@ -252,7 +252,7 @@ define(function(require){
 		formatVMURI: function(vmboxId, mediaId) {
 			var self = this;
 
-			return self.apiUrl + 'accounts/' + self.accountId + '/vmboxes/' + vmboxId + '/messages/' + mediaId + '/raw?auth_token=' + self.authToken + '&folder=saved'
+			return self.apiUrl + 'accounts/' + self.accountId + '/vmboxes/' + vmboxId + '/messages/' + mediaId + '/raw?auth_token=' + self.authToken;
 		},
 
 		playVoicemail: function(template, vmboxId, mediaId) {
@@ -269,6 +269,18 @@ define(function(require){
 					uri: uri
 				},
 				templateCell = $(monster.template(self, 'cell-voicemail-player', dataTemplate));
+
+			// If folder is new, we want to change it to saved
+			if($row.data('folder') === 'new') {
+				self.updateFolder(vmboxId, [ mediaId ], 'saved', function() {
+					$row.data('folder', 'saved')
+						.attr('data-folder', 'saved');
+
+					$row.find('.status').data('folder', 'saved')
+										.attr('data-folder', 'saved')
+										.html(self.i18n.active().voicemails.receivedVMs.status['saved']);
+				});
+			}
 
 			templateCell.find('.close-player').on('click', function() {
 				$row.find('.voicemail-player').remove();
