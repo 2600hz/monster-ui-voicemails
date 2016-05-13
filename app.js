@@ -2,7 +2,6 @@ define(function(require){
 	var $ = require('jquery'),
 		_ = require('underscore'),
 		monster = require('monster'),
-		footable = require('footable'),
 		chosen = require('chosen');
 
 	var app = {
@@ -316,8 +315,7 @@ define(function(require){
 					},
 					template = $(monster.template(self, 'voicemails-list', dataTemplate));
 
-				template.find('.footable')
-						.footable($, footable);
+				monster.ui.footable(template.find('.footable'));
 
 				container.find('.data-state')
 						 .empty()

@@ -31,13 +31,14 @@
 
 .received-voicemails-container .loading-state {
 	display: none;
-	    background: #fff none repeat scroll 0 0;
+	background: #fff none repeat scroll 0 0;
 	border: 1px dashed #aaa;
 	font-size: 60px;
 	padding: 50px;
 	text-align: center;
+	position: relative;
+	top: 50px;
 }
-
 
 /* Action Bar */
 .received-voicemails-container.empty .filters.search,
@@ -49,6 +50,11 @@
 .received-voicemails-container .filters.basic-actions {
 	display: inline-block;
 	width: 200px;
+}
+
+.received-voicemails-container:not(.empty) .action-bar {
+	position: absolute;
+	z-index: 2;
 }
 
 .received-voicemails-container .action-bar {
@@ -95,6 +101,18 @@
 }
 
 /* Table */
+.received-voicemails-container .voicemails-table table {
+	margin-top: 0;
+}
+
+.received-voicemails-container .voicemails-table table .footable-header th:nth-child(1) {
+	min-width: 77px;
+}
+
+.received-voicemails-container .voicemails-table tbody tr {
+	height: 55px;
+}
+
 .received-voicemails-container .voicemails-table tbody tr > td:first-child .monster-checkbox {
 	margin-right: 10px;
 	margin-top: 8px;
@@ -140,6 +158,7 @@
 
 /* Voicemail Player */
 .received-voicemails-container .voicemails-table .voicemail-player {
+	display: table-cell;
 	width: 175px;
 }
 
