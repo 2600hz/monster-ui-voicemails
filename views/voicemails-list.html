@@ -2,7 +2,7 @@
 	<table class="monster-table footable">
 		<thead>
 			<tr>
-				<th data-filterable="false" data-type="html" data-sortable="false"></th>
+				<th data-type="html" data-sortable="false"></th>
 				<th>{{ i18n.voicemails.receivedVMs.table.columns.status }}</th>
 				<!--<th>{{ i18n.voicemails.receivedVMs.table.columns.callId }}</th>-->
 				<th data-type="html" data-sorted="true" data-direction="DESC">{{ i18n.voicemails.receivedVMs.table.columns.received }}</th>
@@ -15,7 +15,7 @@
 		<tbody>
 		{{#each voicemails}}
 			<tr class="voicemail-row" data-search="{{call_id}} {{formatted.from}} {{from}} {{to}} {{formatted.to}} {{formatted.duration}} {{toFriendlyDate timestamp}} {{media_id}}" data-media-id="{{media_id}}" data-call-id="{{call_id}}" data-timestamp="{{timestamp}}" data-folder="{{folder}}">
-				<td>
+				<td data-filter-value="{{call_id}}>
 					{{#monsterCheckbox}}
 						<input class="select-message" type="checkbox" data-media-id="{{media_id}}"/>
 					{{/monsterCheckbox}}

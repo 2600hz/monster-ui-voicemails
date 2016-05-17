@@ -1,7 +1,7 @@
 <div class="received-voicemails-container empty">
 	<div class="action-bar clearfix">
 		<div class="filters basic-actions pull-left">
-			<div class="select-voicemails-wrapper monster-select-dropdown pull-left">
+			<div class="select-voicemails-wrapper monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.select }}">
 				<li class="dropdown">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
 						{{#monsterCheckbox}}
@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="filters selected-actions pull-left margin-left">
-				<div class="mark-as-wrapper hidden monster-select-dropdown pull-left">
+				<div class="mark-as-wrapper hidden monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.markAs }}">
 					<li class="dropdown">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
 							<i class="icon-telicon-prioritize"></i>
@@ -44,7 +44,7 @@
 				{{/each}}
 			</select>
 
-			<button id="refresh_voicemails" class="monster-button-secondary monster-button-fit margin-left">
+			<button id="refresh_voicemails" class="monster-button-secondary monster-button-fit margin-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.refresh }}">
 				<i class="fa fa-refresh"></i>
 			</button>
 		</div>

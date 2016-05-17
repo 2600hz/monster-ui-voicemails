@@ -79,6 +79,8 @@ define(function(require){
 				currentVM,
 				$selectVMBox = template.find('#select_vmbox');
 
+			monster.ui.tooltips(template);
+
 			$selectVMBox.chosen({search_contains: true, width: '220px', placeholder_text_single: self.i18n.active().voicemails.receivedVMs.actionBar.selectVM.none });
 
 			$selectVMBox.on('change', function() {

@@ -35,7 +35,12 @@
 				"to": "To",
 				"markAsNew": "Mark as New",
 				"markAsListened": "Mark as Listened",
-				"markAsDeleted": "Mark as Deleted"
+				"markAsDeleted": "Mark as Deleted",
+				"tooltips": {
+					"markAs": "Mark As",
+					"refresh": "Refresh",
+					"select": "Select"
+				}
 			},
 			"status": {
 				"saved": "Listened",
