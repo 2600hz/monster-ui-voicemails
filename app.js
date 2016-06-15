@@ -113,7 +113,7 @@ define(function(require){
 						.show();
 
 				self.updateFolder(vmboxId, messages, folder, function(vmbox) {
-					self.displayVMList(template, vmboxId, vmbox);
+					self.displayVMList(template, vmboxId);
 				});
 			})
 
@@ -137,15 +137,9 @@ define(function(require){
 
 			template.on('click', '.details-vm', function() {
 				var $row = $(this).parents('.voicemail-row'),
-					callId = $row.data('call-id'),
-					timestamp = $row.data('timestamp'),
-					jsDate = monster.util.gregorianToDate(timestamp),
-					UTCYear = jsDate.getUTCFullYear() + '',
-					UTCMonth = jsDate.getUTCMonth() + 1,
-					formattedUTCMonth = UTCMonth < 10 ? '0' + UTCMonth : UTCMonth + '',
-					modbString = UTCYear + formattedUTCMonth + '-' + callId;
+					callId = $row.data('call-id');
 
-				self.getCDR(modbString, function(cdr) {
+				self.getCDR(callId, function(cdr) {
 					var template = $(monster.template(self, 'voicemails-CDRDialog'));
 
 					monster.ui.renderJSON(cdr, template.find('#jsoneditor'));
@@ -213,29 +207,6 @@ define(function(require){
 				cb.prop('checked',!cb.prop('checked'));
 				afterSelect();
 			});
-
-			template.find('.search-query').on('keyup', function() {
-				var searchString = $(this).val().toLowerCase(),
-					rows = template.find('.voicemails-table tbody > tr'),
-					emptySearch = $(''),
-					showOrHideRow = function(row) {
-						var $row = $(row),
-							keyWords = searchString.split(' '),
-							show = true;
-
-						_.each(keyWords,function(word) {
-							if($row.data('search').toLowerCase().indexOf(word) < 0) {
-								show = false;
-							}
-						});
-
-						show ? $row.show() : $row.hide();
-					};
-
-				_.each(rows, function(row) {
-					showOrHideRow(row);
-				});
-			});
 		},
 
 		removeOpacityLayer: function(template) {
@@ -255,6 +226,7 @@ define(function(require){
 		},
 
 		playVoicemail: function(template, vmboxId, mediaId) {
+			console.log(mediaId);
 			var self = this,
 				$row = template.find('.voicemail-row[data-media-id="'+ mediaId +'"]');
 
@@ -295,7 +267,50 @@ define(function(require){
 			templateCell.find('audio').get(0).play();
 		},
 
-		displayVMList: function(container, vmboxId, vmboxData) {
+		displayVMList: function(container, vmboxId, messages) {
+			var self = this;
+
+			container.removeClass('empty');
+
+			// Gives a better feedback to the user if we empty it as we click... showing the user something is happening.
+			container.find('.data-state')
+					 .empty()
+					 .hide();
+
+			container.find('.loading-state')
+					 .show();
+
+			container.find('.mark-as-wrapper').addClass('hidden');
+			container.find('.main-select-message').prop('checked', false);
+
+			var afterData = function(messages) {
+				var dataTemplate = {
+						voicemails: self.formatMessagesData(messages, vmboxId)
+					},
+					template = $(monster.template(self, 'voicemails-list', dataTemplate));
+
+				monster.ui.footable(template.find('.footable'));
+
+				container.find('.data-state')
+						 .empty()
+						 .append(template)
+						 .show();
+
+				container.find('.loading-state')
+						 .hide();
+			}
+
+			if(messages) {
+				afterData(messages);
+			}
+			else {
+				self.getVMBoxMessages(vmboxId, function(messages) {
+					afterData(messages);
+				});
+			}
+		},
+
+		displayVMListOld: function(container, vmboxId, vmboxData) {
 			var self = this;
 
 			container.removeClass('empty');
@@ -338,6 +353,24 @@ define(function(require){
 			}
 		},
 
+		formatMessagesData: function(voicemails, vmboxId) {
+			var self = this;
+
+			_.each(voicemails, function(vm) {
+				var modbMediaId = monster.util.getModbID(vm.media_id, vm.timestamp);
+
+				vm.formatted = {};
+				vm.formatted.to = monster.util.formatPhoneNumber(vm.to.substr(0, vm.to.indexOf('@')));
+				vm.formatted.from = monster.util.formatPhoneNumber(vm.from.substr(0, vm.from.indexOf('@')));
+				vm.formatted.duration = monster.util.friendlyTimer(vm.length/1000);
+				vm.formatted.uri = self.formatVMURI(vmboxId, modbMediaId);
+				vm.formatted.callId = monster.util.getModbID(vm.call_id, vm.timestamp);
+				vm.formatted.mediaId = modbMediaId;
+			});
+
+			return voicemails;
+		},
+
 		formatVoicemailsData: function(vmbox) {
 			var self = this,
 				voicemails = vmbox.messages;
@@ -356,20 +389,8 @@ define(function(require){
 		updateFolder: function(vmboxId, messages, folder, callback) {
 			var self = this;
 
-			self.getVMBox(vmboxId, function(vmbox) {
-				var messagesToUpdate = vmbox.messages;
-
-				_.each(messagesToUpdate, function(msg) {
-					if(messages.indexOf(msg.media_id) >= 0) {
-						msg.folder = folder;
-					}
-				});
-
-				vmbox.messages = messagesToUpdate;
-
-				self.updateVMBox(vmbox, function(updatedVMBox) {
-					callback && callback(updatedVMBox);
-				});
+			self.updateVMBoxMessages(vmboxId, messages, folder, function() {
+				callback && callback();
 			});
 		},
 
@@ -405,6 +426,41 @@ define(function(require){
 				data: {
 					accountId: self.accountId,
 					voicemailId: vmboxId
+				},
+				success: function(data) {
+					callback && callback(data.data);
+				}
+			});
+		},
+
+		getVMBoxMessages: function(vmboxId, callback) {
+			var self = this;
+
+			self.callApi({
+				resource: 'voicemail.listMessages',
+				data: {
+					accountId: self.accountId,
+					voicemailId: vmboxId
+				},
+				success: function(data) {
+					callback && callback(data.data);
+				}
+			});
+		},
+
+		updateVMBoxMessages: function(vmboxId, messages, folder, callback) {
+			var self = this,
+				data = {
+					messages: messages,
+					folder: folder
+				};
+
+			self.callApi({
+				resource: 'voicemail.updateMessages',
+				data: {
+					accountId: self.accountId,
+					voicemailId: vmboxId,
+					data: data
 				},
 				success: function(data) {
 					callback && callback(data.data);

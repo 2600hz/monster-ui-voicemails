@@ -14,10 +14,10 @@
 		</thead>
 		<tbody>
 		{{#each voicemails}}
-			<tr class="voicemail-row" data-search="{{call_id}} {{formatted.from}} {{from}} {{to}} {{formatted.to}} {{formatted.duration}} {{toFriendlyDate timestamp}} {{media_id}}" data-media-id="{{media_id}}" data-call-id="{{call_id}}" data-timestamp="{{timestamp}}" data-folder="{{folder}}">
-				<td data-filter-value="{{call_id}}>
+			<tr class="voicemail-row" data-media-id="{{formatted.mediaId}}" data-call-id="{{formatted.callId}}" data-timestamp="{{timestamp}}" data-folder="{{folder}}">
+				<td data-filter-value="{{formatted.callId}}">
 					{{#monsterCheckbox}}
-						<input class="select-message" type="checkbox" data-media-id="{{media_id}}"/>
+						<input class="select-message" type="checkbox" data-media-id="{{formatted.mediaId}}"/>
 					{{/monsterCheckbox}}
 				</td>
 				<td class="status select-line" data-folder="{{folder}}">{{tryI18n @root.i18n.voicemails.receivedVMs.status folder}}</td>
@@ -28,7 +28,7 @@
 				<td class="duration select-line">{{formatted.duration}}</td>
 				<td class="actions">
 					<i class="fa fa-play action-item play-vm"></i>
-					<a class="action-item" href="{{formatted.uri}}">
+					<a class="action-item" href="{{formatted.uri}}" target="_blank">
 						<i class="fa fa-download download-vm"></i>
 					</a>
 					<i class="fa fa-list action-item details-vm"></i>
