@@ -357,15 +357,13 @@ define(function(require){
 			var self = this;
 
 			_.each(voicemails, function(vm) {
-				var modbMediaId = monster.util.getModbID(vm.media_id, vm.timestamp);
-
 				vm.formatted = {};
 				vm.formatted.to = monster.util.formatPhoneNumber(vm.to.substr(0, vm.to.indexOf('@')));
 				vm.formatted.from = monster.util.formatPhoneNumber(vm.from.substr(0, vm.from.indexOf('@')));
 				vm.formatted.duration = monster.util.friendlyTimer(vm.length/1000);
 				vm.formatted.uri = self.formatVMURI(vmboxId, modbMediaId);
 				vm.formatted.callId = monster.util.getModbID(vm.call_id, vm.timestamp);
-				vm.formatted.mediaId = modbMediaId;
+				vm.formatted.mediaId = vm.media_id;
 			});
 
 			return voicemails;
