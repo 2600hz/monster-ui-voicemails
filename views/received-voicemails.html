@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="filters selected-actions pull-left margin-left">
-				<div class="mark-as-wrapper hidden monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.markAs }}">
+				<div class="mark-as-wrapper hidable hidden monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.markAs }}">
 					<li class="dropdown">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
 							<i class="icon-telicon-prioritize"></i>
@@ -30,6 +30,20 @@
 							<li><a href="javascript:void(0);" class="mark-as-link" data-type="new">{{ i18n.voicemails.receivedVMs.actionBar.markAsNew }}</a></li>
 							<li><a href="javascript:void(0);" class="mark-as-link" data-type="saved">{{ i18n.voicemails.receivedVMs.actionBar.markAsListened }}</a></li>
 							<li><a href="javascript:void(0);" class="mark-as-link" data-type="deleted">{{ i18n.voicemails.receivedVMs.actionBar.markAsDeleted }}</a></li>
+						</ul>
+					</li>
+				</div>
+
+				<div class="move-to-wrapper hidable hidden monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.moveTo }}">
+					<li class="dropdown">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+							<i class="icon-telicon-forward"></i>
+							<i class="icon-telicon-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu vmbox-target">
+							{{#each vmboxes}}
+								<li><a href="javascript:void(0);" class="move-to-vmbox" data-id="{{id}}">{{ name }}</a></li>
+							{{/each}}
 						</ul>
 					</li>
 				</div>

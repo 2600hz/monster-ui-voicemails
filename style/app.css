@@ -49,7 +49,7 @@
 
 .received-voicemails-container .filters.basic-actions {
 	display: inline-block;
-	width: 200px;
+	width: 270px;
 }
 
 .received-voicemails-container:not(.empty) .action-bar {
@@ -78,12 +78,16 @@
 	margin-bottom: 0;
 }
 
-.received-voicemails-container .action-bar .mark-as-wrapper {
+.received-voicemails-container .action-bar .hidable {
 	display: inline-block;
 }
 
-.received-voicemails-container .action-bar .mark-as-wrapper.hidden {
+.received-voicemails-container .action-bar .hidable.hidden {
 	display: none;
+}
+
+.received-voicemails-container .action-bar .move-to-wrapper {
+	margin-left: 10px;
 }
 
 .received-voicemails-container .action-bar .custom-range > * {
@@ -151,6 +155,12 @@
 	text-align: center !important;
 }
 
+.received-voicemails-container .dropdown-menu.vmbox-target {
+	height: 300px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
 /* Fixing the width to make the transition smoother when playing a file */
 .received-voicemails-container .voicemails-table .actions {
 	width: 128px;
@@ -168,6 +178,7 @@
 
 .received-voicemails-container .voicemails-table .voicemail-player audio {
 	width: 170px;
+	float: right;
 }
 
 .received-voicemails-container .voicemails-table .voicemail-player .close-player {
