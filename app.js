@@ -37,7 +37,6 @@ define(function(require){
 			var self = this;
 
 			monster.ui.generateAppLayout(self, {
-				appName: self.i18n.active().voicemails.title,
 				menus: [
 					{
 						tabs: [
