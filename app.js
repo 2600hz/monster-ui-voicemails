@@ -37,7 +37,6 @@ define(function(require){
 			var self = this;
 
 			monster.ui.generateAppLayout(self, {
-				appName: self.i18n.active().voicemails.title,
 				menus: [
 					{
 						tabs: [
@@ -122,6 +121,28 @@ define(function(require){
 				self.updateFolder(vmboxId, messages, folder, function(vmbox) {
 					self.displayVMList(template, vmboxId);
 				});
+			});
+
+			template.find('.move-to-vmbox').on('click', function() {
+				var targetId = $(this).data('id'),
+					vmboxId = $selectVMBox.val(),
+					$messages = template.find('.select-message:checked'),
+					messages = [];
+
+				$messages.each(function() {
+					messages.push($(this).data('media-id'));
+				});
+
+				template.find('.data-state')
+						.empty()
+						.hide();
+
+				template.find('.loading-state')
+						.show();
+
+				self.moveVoicemailMessages(vmboxId, targetId, messages, function(vmbox) {
+					self.displayVMList(template, vmboxId);
+				});
 			})
 
 			template.on('click', '.play-vm', function() {
@@ -168,11 +189,11 @@ define(function(require){
 
 			function afterSelect() {
 				if(template.find('.select-message:checked').length) {
-					template.find('.mark-as-wrapper').removeClass('hidden');
+					template.find('.hidable').removeClass('hidden');
 					template.find('.main-select-message').prop('checked', true);
 				}
 				else{
-					template.find('.mark-as-wrapper').addClass('hidden');
+					template.find('.hidable').addClass('hidden');
 					template.find('.main-select-message').prop('checked', false);
 				}
 			}
@@ -286,7 +307,7 @@ define(function(require){
 			container.find('.loading-state')
 					 .show();
 
-			container.find('.mark-as-wrapper').addClass('hidden');
+			container.find('.hidable').addClass('hidden');
 			container.find('.main-select-message').prop('checked', false);
 
 			var afterData = function(messages) {
@@ -316,62 +337,17 @@ define(function(require){
 			}
 		},
 
-		displayVMListOld: function(container, vmboxId, vmboxData) {
-			var self = this;
-
-			container.removeClass('empty');
-
-			// Gives a better feedback to the user if we empty it as we click... showing the user something is happening.
-			container.find('.data-state')
-					 .empty()
-					 .hide();
-
-			container.find('.loading-state')
-					 .show();
-
-			container.find('.mark-as-wrapper').addClass('hidden');
-			container.find('.main-select-message').prop('checked', false);
-
-			var afterData = function(vmbox) {
-				var dataTemplate = {
-						voicemails: self.formatVoicemailsData(vmbox)
-					},
-					template = $(monster.template(self, 'voicemails-list', dataTemplate));
-
-				monster.ui.footable(template.find('.footable'));
-
-				container.find('.data-state')
-						 .empty()
-						 .append(template)
-						 .show();
-
-				container.find('.loading-state')
-						 .hide();
-			}
-
-			if(vmboxData) {
-				afterData(vmboxData);
-			}
-			else {
-				self.getVMBox(vmboxId, function(vmboxData) {
-					afterData(vmboxData);
-				});
-			}
-		},
-
 		formatMessagesData: function(voicemails, vmboxId) {
 			var self = this;
 
 			_.each(voicemails, function(vm) {
-				var modbMediaId = monster.util.getModbID(vm.media_id, vm.timestamp);
-
 				vm.formatted = {};
 				vm.formatted.to = monster.util.formatPhoneNumber(vm.to.substr(0, vm.to.indexOf('@')));
 				vm.formatted.from = monster.util.formatPhoneNumber(vm.from.substr(0, vm.from.indexOf('@')));
 				vm.formatted.duration = monster.util.friendlyTimer(vm.length/1000);
-				vm.formatted.uri = self.formatVMURI(vmboxId, modbMediaId);
+				vm.formatted.uri = self.formatVMURI(vmboxId, vm.media_id);
 				vm.formatted.callId = monster.util.getModbID(vm.call_id, vm.timestamp);
-				vm.formatted.mediaId = modbMediaId;
+				vm.formatted.mediaId = vm.media_id;
 			});
 
 			return voicemails;
@@ -454,12 +430,28 @@ define(function(require){
 			});
 		},
 
+		moveVoicemailMessages: function(vmboxId, targetId, messages, callback) {
+			var self = this,
+				data = {
+					messages: messages,
+					source_id: targetId
+				};
+
+			self.bulkUpdateMessages(vmboxId, data, callback);
+		},
+
 		updateVMBoxMessages: function(vmboxId, messages, folder, callback) {
 			var self = this,
 				data = {
 					messages: messages,
 					folder: folder
 				};
+
+			self.bulkUpdateMessages(vmboxId, data, callback);
+		},
+
+		bulkUpdateMessages: function(vmboxId, data, callback) {
+			var self = this;
 
 			self.callApi({
 				resource: 'voicemail.updateMessages',

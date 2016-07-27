@@ -40,7 +40,8 @@
 				"tooltips": {
 					"markAs": "Mark As",
 					"refresh": "Refresh",
-					"select": "Select"
+					"select": "Select",
+					"moveTo": "Move To"
 				}
 			},
 			"status": {

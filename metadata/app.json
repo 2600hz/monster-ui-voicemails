@@ -12,7 +12,7 @@
 	"tags": [
 		"reseller"
 	],
-	"icon": "",
+	"icon": "Voicemail_app.png",
 	"api_url": "http://10.26.0.41:8000/v2",
 	"author": "2600Hz",
 	"version": "1.0",
