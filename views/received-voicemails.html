@@ -54,7 +54,24 @@
 		<div class="empty-state">
 			<i class="icon-title icon-telicon-voicemail"></i>
 			<div class="headline">{{ i18n.voicemails.receivedVMs.empty.headline }}</div>
-			<div class="subtitle">{{ i18n.voicemails.receivedVMs.empty.subtitle }}</div>
+			<div class="vmboxes-list">
+				<table class="monster-table footable">
+					<thead>
+						<tr>
+							<th data-breakpoints="xs">{{ i18n.voicemails.receivedVMs.table.columns.name }}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each vmboxes}}
+							<tr class="box-row" data-id="{{id}}">
+								<td>
+									{{name}}
+								</td>
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="data-state">
 

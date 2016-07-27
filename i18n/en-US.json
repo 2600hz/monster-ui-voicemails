@@ -12,12 +12,13 @@
 					"received": "Received",
 					"from": "From",
 					"targetNumber": "Target Number",
-					"duration": "Duration"
+					"duration": "Duration",
+					"name": "Name"
 				},
 				"emptyRow": "There are no messages stored in the selected Voicemail Box"
 			},
 			"empty": {
-				"headline": "In order to view and manage voicemails, first select the desired voicemail box in this account.",
+				"headline": "In order to view and manage voicemails, first select a voicemail box in the table below.",
 				"subtitle": "Use the 'Select a Voicemail Box' above and to the left."
 			},
 			"actionBar": {

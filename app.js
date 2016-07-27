@@ -80,8 +80,15 @@ define(function(require){
 				$selectVMBox = template.find('#select_vmbox');
 
 			monster.ui.tooltips(template);
+			monster.ui.footable(template.find('.footable'));
 
 			$selectVMBox.chosen({search_contains: true, width: '220px', placeholder_text_single: self.i18n.active().voicemails.receivedVMs.actionBar.selectVM.none });
+
+			template.find('.vmboxes-list').on('click', '.box-row', function() {
+				$selectVMBox.val($(this).data('id'));
+				$selectVMBox.trigger("chosen:updated");
+				self.displayVMList(template, $(this).data('id'));
+			});
 
 			$selectVMBox.on('change', function() {
 				self.displayVMList(template, $(this).val());
@@ -226,7 +233,6 @@ define(function(require){
 		},
 
 		playVoicemail: function(template, vmboxId, mediaId) {
-			console.log(mediaId);
 			var self = this,
 				$row = template.find('.voicemail-row[data-media-id="'+ mediaId +'"]');
 

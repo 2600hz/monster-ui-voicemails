@@ -40,6 +40,21 @@
 	top: 50px;
 }
 
+.received-voicemails-container .vmboxes-list {
+	display: block;
+	margin: auto;
+	width: 400px;
+}
+
+.received-voicemails-container .vmboxes-list td,
+.received-voicemails-container .vmboxes-list .footable-header th {
+	text-align: left !important;
+}
+
+.received-voicemails-container .vmboxes-list td:hover {
+	background: #FAFAFA;
+	cursor: pointer;
+}
 /* Action Bar */
 .received-voicemails-container.empty .filters.search,
 .received-voicemails-container.empty .filters.basic-actions > *,
@@ -55,10 +70,12 @@
 .received-voicemails-container:not(.empty) .action-bar {
 	position: absolute;
 	z-index: 2;
+	display: block;
 }
 
 .received-voicemails-container .action-bar {
 	margin-bottom: 25px;
+	display: none;
 }
 
 .received-voicemails-container .action-bar .filters > :first-child {
