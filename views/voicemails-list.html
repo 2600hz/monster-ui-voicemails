@@ -22,9 +22,9 @@
 				</td>
 				<td class="status select-line" data-folder="{{folder}}">{{tryI18n @root.i18n.voicemails.receivedVMs.status folder}}</td>
 				<!--<td class="select-line">{{call_id}}</td>-->
-				<td class="select-line" data-filter-value="{{timestamp}}">{{toFriendlyDate timestamp}}</td>
-				<td class="select-line">{{formatted.from}}</td>
-				<td class="select-line">{{formatted.to}}</td>
+				<td class="select-line" data-filter-value="{{timestamp}} {{toFriendlyDate timestamp}}" data-sort-value="{{timestamp}}">{{toFriendlyDate timestamp}}</td>
+				<td class="select-line" data-filter-value="{{from}} {{formatted.from}}">{{formatted.from}}</td>
+				<td class="select-line" data-filter-value="{{to}} {{formatted.to}}">{{formatted.to}}</td>
 				<td class="duration select-line">{{formatted.duration}}</td>
 				<td class="actions">
 					<i class="fa fa-play action-item play-vm"></i>
