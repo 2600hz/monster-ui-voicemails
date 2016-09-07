@@ -208,6 +208,27 @@
 	padding: 3px 12px;
 }
 
+
+.received-voicemails-container .date-ranges {
+	float: right;
+	margin-left: 60px;
+}
+
+.received-voicemails-container .date-ranges > * {
+	margin: 0 10px 0 0;
+	vertical-align: middle;
+}
+
+.received-voicemails-container .date-ranges > span {
+	margin-right: 5px;
+}
+
+.received-voicemails-container .date-ranges input.date-filter {
+	height: 24px;
+	width: 80px;
+}
+
+
 /* CDR Popup */
 #voicemails_cdr_details_dialog {
 	width: 750px;

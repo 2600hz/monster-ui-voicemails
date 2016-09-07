@@ -13,6 +13,13 @@ define(function(require){
 			'en-US': { customCss: false }
 		},
 
+		appFlags: {
+			voicemails: {
+				maxRange: 31,
+				defaultRange: 7
+			}
+		},
+
 		requests: {},
 		subscribe: {},
 
@@ -61,6 +68,8 @@ define(function(require){
 					},
 					template = $(monster.template(self, 'received-voicemails', dataTemplate));
 
+				self.voicemailsInitDatePicker(parent, template);
+
 				self.bindReceivedVMs(template);
 
 				parent
@@ -70,6 +79,29 @@ define(function(require){
 							.append(template)
 							.fadeIn();
 					});
+			});
+		},
+
+		voicemailsInitDatePicker: function(parent, template) {
+			var self = this,
+				dates = monster.util.getDefaultRangeDates(self.appFlags.voicemails.defaultRange),
+				fromDate = dates.from,
+				toDate = dates.to;
+
+			var optionsDatePicker = {
+				container: template,
+				range: self.appFlags.voicemails.maxRange
+			};
+
+			monster.ui.initRangeDatepicker(optionsDatePicker);
+
+			template.find('#startDate').datepicker('setDate', fromDate);
+			template.find('#endDate').datepicker('setDate', toDate);
+
+			template.find('.apply-filter').on('click', function(e) {
+				var vmboxId = template.find('#select_vmbox').val();
+
+				self.displayVMList(parent, vmboxId);
 			});
 		},
 
@@ -294,14 +326,29 @@ define(function(require){
 			templateCell.find('audio').get(0).play();
 		},
 
-		displayVMList: function(container, vmboxId, messages) {
+		voicemailsGetRows: function(filters, vmboxId, callback) {
 			var self = this;
+
+			self.newGetVMBoxMessages(filters, vmboxId, function(data) {
+				var dataTemplate = {
+						voicemails: self.formatMessagesData(data.data, vmboxId)
+					},
+					$rows = $(monster.template(self, 'voicemails-rows', dataTemplate));
+
+				callback && callback($rows, data);
+			});
+		},
+
+		displayVMList: function(container, vmboxId, fromDate, toDate) {
+			var self = this,
+				fromDate = container.find('input.filter-from').datepicker('getDate'),
+				toDate = container.find('input.filter-to').datepicker('getDate');
 
 			container.removeClass('empty');
 
 			// Gives a better feedback to the user if we empty it as we click... showing the user something is happening.
 			container.find('.data-state')
-					 .empty()
+					 //.empty()
 					 .hide();
 
 			container.find('.loading-state')
@@ -310,31 +357,26 @@ define(function(require){
 			container.find('.hidable').addClass('hidden');
 			container.find('.main-select-message').prop('checked', false);
 
-			var afterData = function(messages) {
-				var dataTemplate = {
-						voicemails: self.formatMessagesData(messages, vmboxId)
-					},
-					template = $(monster.template(self, 'voicemails-list', dataTemplate));
-
-				monster.ui.footable(template.find('.footable'));
-
-				container.find('.data-state')
-						 .empty()
-						 .append(template)
+			monster.ui.footable(container.find('.footable'), {
+				getData: function(filters, callback) {
+					filters = $.extend(true, filters, {
+						created_from: monster.util.dateToBeginningOfGregorianDay(fromDate),
+						created_to:  monster.util.dateToEndOfGregorianDay(toDate),
+					});
+					// we do this to keep context
+					self.voicemailsGetRows(filters, vmboxId, callback);
+				},
+				afterInitialized: function() {
+					container.find('.data-state')
 						 .show();
 
-				container.find('.loading-state')
+					container.find('.loading-state')
 						 .hide();
-			}
-
-			if(messages) {
-				afterData(messages);
-			}
-			else {
-				self.getVMBoxMessages(vmboxId, function(messages) {
-					afterData(messages);
-				});
-			}
+				},
+				backendPagination: {
+					enabled: false
+				}
+			});
 		},
 
 		formatMessagesData: function(voicemails, vmboxId) {
@@ -426,6 +468,22 @@ define(function(require){
 				},
 				success: function(data) {
 					callback && callback(data.data);
+				}
+			});
+		},
+
+		newGetVMBoxMessages: function(filters, vmboxId, callback) {
+			var self = this;
+
+			self.callApi({
+				resource: 'voicemail.listMessages',
+				data: {
+					accountId: self.accountId,
+					voicemailId: vmboxId,
+					filters: filters
+				},
+				success: function(data) {
+					callback && callback(data);
 				}
 			});
 		},

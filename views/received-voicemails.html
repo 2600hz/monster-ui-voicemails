@@ -62,6 +62,14 @@
 				<i class="fa fa-refresh"></i>
 			</button>
 		</div>
+
+		<div class="date-ranges">
+			<span>{{i18n.startDate}}</span>
+			<input id="startDate" type="text" class="date-filter filter-from">
+			<span>{{i18n.endDate}}</span>
+			<input id="endDate" type="text" class="date-filter filter-to">
+			<button type="button" class="apply-filter monster-button monster-button-primary">{{i18n.filter}}</button>
+		</div>
 	</div>
 
 	<div class="content">
@@ -88,7 +96,25 @@
 			</div>
 		</div>
 		<div class="data-state">
+			<div class="voicemails-table">
+				<table class="monster-table footable">
+					<thead>
+						<tr>
+							<th data-type="html" data-sortable="false"></th>
+							<th>{{ i18n.voicemails.receivedVMs.table.columns.status }}</th>
+							<!--<th>{{ i18n.voicemails.receivedVMs.table.columns.callId }}</th>-->
+							<th data-type="html" data-sorted="true" data-direction="DESC">{{ i18n.voicemails.receivedVMs.table.columns.received }}</th>
+							<th>{{ i18n.voicemails.receivedVMs.table.columns.from }}</th>
+							<th>{{ i18n.voicemails.receivedVMs.table.columns.targetNumber }}</th>
+							<th data-breakpoints="xs">{{ i18n.voicemails.receivedVMs.table.columns.duration }}</th>
+							<th data-filterable="false" data-type="html" data-sortable="false"></th>
+						</tr>
+					</thead>
+					<tbody>
 
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="loading-state">
 			<i class="fa fa-spin fa-spinner monster-blue"></i>
