@@ -144,7 +144,6 @@ define(function(require){
 				});
 
 				template.find('.data-state')
-						.empty()
 						.hide();
 
 				template.find('.loading-state')
@@ -166,7 +165,6 @@ define(function(require){
 				});
 
 				template.find('.data-state')
-						.empty()
 						.hide();
 
 				template.find('.loading-state')
@@ -357,7 +355,7 @@ define(function(require){
 			container.find('.hidable').addClass('hidden');
 			container.find('.main-select-message').prop('checked', false);
 
-			monster.ui.footable(container.find('.footable'), {
+			monster.ui.footable(container.find('.voicemails-table .footable'), {
 				getData: function(filters, callback) {
 					filters = $.extend(true, filters, {
 						created_from: monster.util.dateToBeginningOfGregorianDay(fromDate),
