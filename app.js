@@ -16,7 +16,7 @@ define(function(require){
 		appFlags: {
 			voicemails: {
 				maxRange: 31,
-				defaultRange: 7
+				defaultRange: 1
 			}
 		},
 
@@ -102,6 +102,10 @@ define(function(require){
 				var vmboxId = template.find('#select_vmbox').val();
 
 				self.displayVMList(parent, vmboxId);
+			});
+
+			template.find('.toggle-filter').on('click', function() {
+				template.find('.filter-by-date').toggleClass('active');
 			});
 		},
 
@@ -337,10 +341,11 @@ define(function(require){
 			});
 		},
 
-		displayVMList: function(container, vmboxId, fromDate, toDate) {
+		displayVMList: function(container, vmboxId) {
 			var self = this,
 				fromDate = container.find('input.filter-from').datepicker('getDate'),
-				toDate = container.find('input.filter-to').datepicker('getDate');
+				toDate = container.find('input.filter-to').datepicker('getDate'),
+				filterByDate = container.find('.filter-by-date').hasClass('active');
 
 			container.removeClass('empty');
 
@@ -357,10 +362,12 @@ define(function(require){
 
 			monster.ui.footable(container.find('.voicemails-table .footable'), {
 				getData: function(filters, callback) {
-					filters = $.extend(true, filters, {
-						created_from: monster.util.dateToBeginningOfGregorianDay(fromDate),
-						created_to:  monster.util.dateToEndOfGregorianDay(toDate),
-					});
+					if(filterByDate) {
+						filters = $.extend(true, filters, {
+							created_from: monster.util.dateToBeginningOfGregorianDay(fromDate),
+							created_to:  monster.util.dateToEndOfGregorianDay(toDate),
+						});
+					}
 					// we do this to keep context
 					self.voicemailsGetRows(filters, vmboxId, callback);
 				},

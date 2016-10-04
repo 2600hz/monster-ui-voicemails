@@ -209,10 +209,10 @@
 }
 
 
-.received-voicemails-container .date-ranges {
+/*.received-voicemails-container .date-ranges {
 	float: right;
 	margin-left: 60px;
-}
+}*/
 
 .received-voicemails-container .date-ranges > * {
 	margin: 0 10px 0 0;
@@ -228,6 +228,24 @@
 	width: 80px;
 }
 
+.received-voicemails-container .filter-by-date {
+	float: right;
+	line-height: 30px;
+	margin-left: 30px;
+}
+
+.received-voicemails-container .filter-by-date.active .expand-dates {
+	float: right;
+}
+
+.received-voicemails-container .filter-by-date .date-ranges,
+.received-voicemails-container .filter-by-date.active .expand-dates {
+	display: none;
+}
+
+.received-voicemails-container .filter-by-date.active .date-ranges {
+	display: block;
+}
 
 /* CDR Popup */
 #voicemails_cdr_details_dialog {

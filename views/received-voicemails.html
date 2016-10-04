@@ -63,12 +63,18 @@
 			</button>
 		</div>
 
-		<div class="date-ranges">
-			<span>{{i18n.startDate}}</span>
-			<input id="startDate" type="text" class="date-filter filter-from">
-			<span>{{i18n.endDate}}</span>
-			<input id="endDate" type="text" class="date-filter filter-to">
-			<button type="button" class="apply-filter monster-button monster-button-primary">{{i18n.filter}}</button>
+		<div class="filter-by-date">
+			<div class="expand-dates">
+				<a class="monster-link blue toggle-filter">{{ i18n.voicemails.receivedVMs.filterByDate }}</a>
+			</div>
+			<div class="date-ranges">
+				<span>{{i18n.startDate}}</span>
+				<input id="startDate" type="text" class="date-filter filter-from">
+				<span>{{i18n.endDate}}</span>
+				<input id="endDate" type="text" class="date-filter filter-to">
+				<button type="button" class="apply-filter monster-button monster-button-primary">{{i18n.filter}}</button>
+				<a class="monster-link blue toggle-filter">{{i18n.cancel}}</a>
+			</div>
 		</div>
 	</div>
 

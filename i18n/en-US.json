@@ -5,6 +5,7 @@
 			"receivedVMs": "Received Voicemails"
 		},
 		"receivedVMs": {
+			"filterByDate": "Filter by Dates",
 			"table": {
 				"columns": {
 					"status": "Status",
