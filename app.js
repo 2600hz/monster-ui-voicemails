@@ -284,7 +284,7 @@ define(function(require){
 		formatVMURI: function(vmboxId, mediaId) {
 			var self = this;
 
-			return self.apiUrl + 'accounts/' + self.accountId + '/vmboxes/' + vmboxId + '/messages/' + mediaId + '/raw?auth_token=' + self.authToken;
+			return self.apiUrl + 'accounts/' + self.accountId + '/vmboxes/' + vmboxId + '/messages/' + mediaId + '/raw?auth_token=' + self.getAuthToken();
 		},
 
 		playVoicemail: function(template, vmboxId, mediaId) {
