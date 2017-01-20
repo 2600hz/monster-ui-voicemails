@@ -42,8 +42,10 @@
 					"markAs": "Mark As",
 					"refresh": "Refresh",
 					"select": "Select",
-					"moveTo": "Move To"
-				}
+					"moveTo": "Move To",
+					"delete": "This will remove the selected voicemails from the database and they won't be retrievable afterwards."
+				},
+				"delete": "Delete"
 			},
 			"status": {
 				"saved": "Listened",

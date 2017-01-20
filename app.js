@@ -158,6 +158,26 @@ define(function(require){
 				});
 			});
 
+			template.find('.delete-voicemails').on('click', function() {
+				var vmboxId = $selectVMBox.val(),
+					$messages = template.find('.select-message:checked'),
+					messages = [];
+
+				$messages.each(function() {
+					messages.push($(this).data('media-id'));
+				});
+
+				template.find('.data-state')
+						.hide();
+
+				template.find('.loading-state')
+						.show();
+
+				self.bulkRemoveMessages(vmboxId, messages, function(vmbox) {
+					self.displayVMList(template, vmboxId);
+				});
+			});
+
 			template.find('.move-to-vmbox').on('click', function() {
 				var targetId = $(this).data('id'),
 					vmboxId = $selectVMBox.val(),
@@ -513,10 +533,28 @@ define(function(require){
 			self.bulkUpdateMessages(vmboxId, data, callback);
 		},
 
-		bulkUpdateMessages: function(vmboxId, data, callback) {
+		bulkRemoveMessages: function(vmboxId, messages, callback) {
 			var self = this;
 
 			self.callApi({
+				resource: 'voicemail.deleteMessages',
+				data: {
+					accountId: self.accountId,
+					voicemailId: vmboxId,
+					data: {
+						messages: messages
+					}
+				},
+				success: function(data) {
+					callback && callback(data.data);
+				}
+			});
+		},
+
+		bulkUpdateMessages: function(vmboxId, data, callback) {
+			var self = this;
+
+		self.callApi({
 				resource: 'voicemail.updateMessages',
 				data: {
 					accountId: self.accountId,
