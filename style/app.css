@@ -68,13 +68,10 @@
 }
 
 .received-voicemails-container:not(.empty) .action-bar {
-	position: absolute;
-	z-index: 2;
 	display: block;
 }
 
 .received-voicemails-container .action-bar {
-	margin-bottom: 25px;
 	display: none;
 }
 
