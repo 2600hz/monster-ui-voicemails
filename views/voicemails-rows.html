@@ -8,7 +8,16 @@
 		<td class="status select-line" data-folder="{{folder}}">{{tryI18n @root.i18n.voicemails.receivedVMs.status folder}}</td>
 		<!--<td class="select-line">{{call_id}}</td>-->
 		<td class="select-line" data-filter-value="{{timestamp}} {{toFriendlyDate timestamp}}" data-sort-value="{{timestamp}}">{{toFriendlyDate timestamp}}</td>
-		<td class="select-line" data-filter-value="{{from}} {{formatted.from}}">{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}</td>
+		{{#if formatted.showCallerIDName}}
+			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}">
+				<div class="top-line">{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}</div>
+				<div class="bottom-line">{{#monsterNumberWrapper formatted.callerIDName}}{{/monsterNumberWrapper}}</div>
+			</td>
+		{{else}}
+			<td class="select-line" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}">
+				{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}
+			</td>
+		{{/if}}
 		<td class="select-line" data-filter-value="{{to}} {{formatted.to}}">{{#monsterNumberWrapper formatted.to}}{{/monsterNumberWrapper}}</td>
 		<td class="duration select-line">{{formatted.duration}}</td>
 		<td class="actions">
