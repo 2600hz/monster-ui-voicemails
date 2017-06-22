@@ -127,10 +127,6 @@
 	min-width: 77px;
 }
 
-.received-voicemails-container .voicemails-table tbody tr {
-	height: 55px;
-}
-
 .received-voicemails-container .voicemails-table tbody tr > td:first-child .monster-checkbox {
 	margin-right: 10px;
 	margin-top: 8px;
@@ -163,6 +159,10 @@
 
 .received-voicemails-container .voicemails-table .select-line {
 	cursor: pointer;
+}
+
+.received-voicemails-container .voicemails-table td.no-padding {
+	padding: 0;
 }
 
 .received-voicemails-container .voicemails-table .empty-vm-row td {
