@@ -411,25 +411,12 @@ define(function(require){
 				vm.formatted = {};
 				vm.formatted.to = monster.util.formatPhoneNumber(vm.to.substr(0, vm.to.indexOf('@')));
 				vm.formatted.from = monster.util.formatPhoneNumber(vm.from.substr(0, vm.from.indexOf('@')));
+				vm.formatted.callerIDName = monster.util.formatPhoneNumber(vm.caller_id_name);
 				vm.formatted.duration = monster.util.friendlyTimer(vm.length/1000);
 				vm.formatted.uri = self.formatVMURI(vmboxId, vm.media_id);
 				vm.formatted.callId = monster.util.getModbID(vm.call_id, vm.timestamp);
 				vm.formatted.mediaId = vm.media_id;
-			});
-
-			return voicemails;
-		},
-
-		formatVoicemailsData: function(vmbox) {
-			var self = this,
-				voicemails = vmbox.messages;
-
-			_.each(voicemails, function(vm) {
-				vm.formatted = {};
-				vm.formatted.to = monster.util.formatPhoneNumber(vm.to.substr(0, vm.to.indexOf('@')));
-				vm.formatted.from = monster.util.formatPhoneNumber(vm.from.substr(0, vm.from.indexOf('@')));
-				vm.formatted.duration = monster.util.friendlyTimer(vm.length/1000);
-				vm.formatted.uri = self.formatVMURI(vmbox.id, vm.media_id);
+				vm.formatted.showCallerIDName = vm.formatted.callerIDName !== vm.formatted.from;
 			});
 
 			return voicemails;
