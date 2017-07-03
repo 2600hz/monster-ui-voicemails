@@ -43,8 +43,8 @@ define(function(require){
 		render: function(container) {
 			var self = this;
 
-			monster.ui.generateAppLayout(self, {
-				menus: [
+			self.getVoicemailsData(function(results) {
+				var menus = [
 					{
 						tabs: [
 							{
@@ -53,8 +53,93 @@ define(function(require){
 							}
 						]
 					}
-				]
+				];
+
+				if (results.storage) {
+					var tabStorage = {
+						text: self.i18n.active().voicemails.menuTitles.storage,
+						callback: self.renderStorage
+					};
+
+					menus[0].tabs.push(tabStorage);
+				}
+
+				monster.ui.generateAppLayout(self, {
+					menus: menus
+				});
 			});
+		},
+
+		getVoicemailsData: function(callback) {
+			var self = this;
+
+			monster.parallel({
+				storage: function(callback) {
+					self.getStorage(function(storage) {
+						callback(null, storage);
+					});
+				}
+			},
+			function(err, results) {
+				callback && callback(results);
+			});
+		},
+
+		getStorage: function(callback) {
+			var self = this;
+
+			self.callApi({
+				resource: 'storage.get',
+				data: {
+					accountId: self.accountId,
+					generateError: false
+				},
+				success: function(data) {
+					callback(data.data);
+				},
+				error: function(data, error, globalHandler) {
+					if (error.status === 404) {
+						callback(undefined);
+					} else {
+						globalHandler(data);
+					}
+				}
+			});
+		},
+
+		renderStorage: function(pArgs) {
+			var self = this,
+				args = pArgs || {},
+				parent = args.container || $('#voicemails_app_container .app-content-wrapper');
+
+			self.getStorage(function(storage) {
+				var formattedData = self.storageFormatData(storage),
+					template = $(monster.template(self, 'storage', formattedData));
+
+				self.storageBindEvents(template);
+
+				monster.pub('common.storagePlanManager.render', {
+					container: template.find('.control-container'),
+					forceTypes: ['mailbox_message'],
+					hideOtherTypes: true
+				});
+
+				parent
+					.fadeOut(function() {
+						$(this)
+							.empty()
+							.append(template)
+							.fadeIn();
+					});
+			});
+		},
+
+		storageBindEvents: function(template) {
+			var self = this;
+		},
+
+		storageFormatData: function(data) {
+			return data;
 		},
 
 		renderReceivedVMs: function(pArgs) {
