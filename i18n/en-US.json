@@ -2,7 +2,8 @@
 	"voicemails": {
 		"title": "Voicemail Manager",
 		"menuTitles": {
-			"receivedVMs": "Received Voicemails"
+			"receivedVMs": "Received Voicemails",
+			"storage": "Storage"
 		},
 		"receivedVMs": {
 			"filterByDate": "Filter by Dates",
