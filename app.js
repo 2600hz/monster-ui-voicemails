@@ -1,4 +1,4 @@
-define(function(require){
+define(function(require) {
 	var $ = require('jquery'),
 		_ = require('underscore'),
 		monster = require('monster'),
@@ -9,7 +9,7 @@ define(function(require){
 
 		css: [ 'app' ],
 
-		i18n: { 
+		i18n: {
 			'en-US': { customCss: false }
 		},
 
@@ -23,7 +23,7 @@ define(function(require){
 		requests: {},
 		subscribe: {},
 
-		load: function(callback){
+		load: function(callback) {
 			var self = this;
 
 			self.initApp(function() {
@@ -196,17 +196,16 @@ define(function(require){
 
 		bindReceivedVMs: function(template) {
 			var self = this,
-				currentVM,
 				$selectVMBox = template.find('#select_vmbox');
 
 			monster.ui.tooltips(template);
 			monster.ui.footable(template.find('.footable'));
 
-			$selectVMBox.chosen({search_contains: true, width: '220px', placeholder_text_single: self.i18n.active().voicemails.receivedVMs.actionBar.selectVM.none });
+			$selectVMBox.chosen({ search_contains: true, width: '220px', placeholder_text_single: self.i18n.active().voicemails.receivedVMs.actionBar.selectVM.none });
 
 			template.find('.vmboxes-list').on('click', '.box-row', function() {
 				$selectVMBox.val($(this).data('id'));
-				$selectVMBox.trigger("chosen:updated");
+				$selectVMBox.trigger('chosen:updated');
 				self.displayVMList(template, $(this).data('id'));
 			});
 
@@ -217,7 +216,7 @@ define(function(require){
 			template.find('#refresh_voicemails').on('click', function() {
 				var vmboxId = $selectVMBox.val();
 
-				if(vmboxId !== 'none') {
+				if (vmboxId !== 'none') {
 					self.displayVMList(template, vmboxId);
 				}
 			});
@@ -238,7 +237,7 @@ define(function(require){
 				template.find('.loading-state')
 						.show();
 
-				self.updateFolder(vmboxId, messages, folder, function(vmbox) {
+				self.updateFolder(vmboxId, messages, folder, function() {
 					self.displayVMList(template, vmboxId);
 				});
 			});
@@ -258,7 +257,7 @@ define(function(require){
 				template.find('.loading-state')
 						.show();
 
-				self.bulkRemoveMessages(vmboxId, messages, function(vmbox) {
+				self.bulkRemoveMessages(vmboxId, messages, function() {
 					self.displayVMList(template, vmboxId);
 				});
 			});
@@ -279,16 +278,16 @@ define(function(require){
 				template.find('.loading-state')
 						.show();
 
-				self.moveVoicemailMessages(vmboxId, targetId, messages, function(vmbox) {
+				self.moveVoicemailMessages(vmboxId, targetId, messages, function() {
 					self.displayVMList(template, vmboxId);
 				});
-			})
+			});
 
 			template.on('click', '.play-vm', function() {
 				var $row = $(this).parents('.voicemail-row'),
 					$activeRows = template.find('.voicemail-row.active');
 
-				if($row.hasClass('active') || $activeRows.length === 0) {
+				if ($row.hasClass('active') || $activeRows.length === 0) {
 					var vmboxId = template.find('#select_vmbox').val(),
 						mediaId = $row.data('media-id');
 
@@ -296,8 +295,7 @@ define(function(require){
 					$row.addClass('active');
 
 					self.playVoicemail(template, vmboxId, mediaId);
-				}
-				else {
+				} else {
 					self.removeOpacityLayer(template);
 				}
 			});
@@ -321,17 +319,16 @@ define(function(require){
 				var $table = template.find('table'),
 					$clickedRow = $(this);
 
-				if($table.hasClass('highlighted') && !$clickedRow.hasClass('active')) {
-					self.removeOpacityLayer(template)
+				if ($table.hasClass('highlighted') && !$clickedRow.hasClass('active')) {
+					self.removeOpacityLayer(template);
 				}
 			});
 
 			function afterSelect() {
-				if(template.find('.select-message:checked').length) {
+				if (template.find('.select-message:checked').length) {
 					template.find('.hidable').removeClass('hidden');
 					template.find('.main-select-message').prop('checked', true);
-				}
-				else{
+				} else {
 					template.find('.hidable').addClass('hidden');
 					template.find('.main-select-message').prop('checked', false);
 				}
@@ -356,12 +353,11 @@ define(function(require){
 
 				template.find('.select-message').prop('checked', false);
 
-				if(type !== 'none') {
-					if(type === 'all') {
+				if (type !== 'none') {
+					if (type === 'all') {
 						template.find('.select-message').prop('checked', true);
-					}
-					else if(['new','saved','deleted'].indexOf(type) >= 0) {
-						template.find('.voicemail-row[data-folder="'+ type +'"] .select-message').prop('checked', true);
+					} else if (['new', 'saved', 'deleted'].indexOf(type) >= 0) {
+						template.find('.voicemail-row[data-folder="' + type + '"] .select-message').prop('checked', true);
 					}
 				}
 
@@ -371,7 +367,7 @@ define(function(require){
 			template.on('click', '.select-line', function() {
 				var cb = $(this).parents('.voicemail-row').find('.select-message');
 
-				cb.prop('checked',!cb.prop('checked'));
+				cb.prop('checked', !cb.prop('checked'));
 				afterSelect();
 			});
 		},
@@ -394,7 +390,7 @@ define(function(require){
 
 		playVoicemail: function(template, vmboxId, mediaId) {
 			var self = this,
-				$row = template.find('.voicemail-row[data-media-id="'+ mediaId +'"]');
+				$row = template.find('.voicemail-row[data-media-id="' + mediaId + '"]');
 
 			template.find('table').addClass('highlighted');
 			$row.addClass('active');
@@ -408,14 +404,14 @@ define(function(require){
 				templateCell = $(monster.template(self, 'cell-voicemail-player', dataTemplate));
 
 			// If folder is new, we want to change it to saved
-			if($row.data('folder') === 'new') {
+			if ($row.data('folder') === 'new') {
 				self.updateFolder(vmboxId, [ mediaId ], 'saved', function() {
 					$row.data('folder', 'saved')
 						.attr('data-folder', 'saved');
 
 					$row.find('.status').data('folder', 'saved')
 										.attr('data-folder', 'saved')
-										.html(self.i18n.active().voicemails.receivedVMs.status['saved']);
+										.html(self.i18n.active().voicemails.receivedVMs.status.saved);
 				});
 			}
 
@@ -456,21 +452,20 @@ define(function(require){
 
 			// Gives a better feedback to the user if we empty it as we click... showing the user something is happening.
 			container.find('.data-state')
-					 //.empty()
-					 .hide();
+						.hide();
 
 			container.find('.loading-state')
-					 .show();
+						.show();
 
 			container.find('.hidable').addClass('hidden');
 			container.find('.main-select-message').prop('checked', false);
 
 			monster.ui.footable(container.find('.voicemails-table .footable'), {
 				getData: function(filters, callback) {
-					if(filterByDate) {
+					if (filterByDate) {
 						filters = $.extend(true, filters, {
 							created_from: monster.util.dateToBeginningOfGregorianDay(fromDate),
-							created_to:  monster.util.dateToEndOfGregorianDay(toDate),
+							created_to: monster.util.dateToEndOfGregorianDay(toDate)
 						});
 					}
 					// we do this to keep context
@@ -478,10 +473,10 @@ define(function(require){
 				},
 				afterInitialized: function() {
 					container.find('.data-state')
-						 .show();
+								.show();
 
 					container.find('.loading-state')
-						 .hide();
+								.hide();
 				},
 				backendPagination: {
 					enabled: false
@@ -497,7 +492,7 @@ define(function(require){
 				vm.formatted.to = monster.util.formatPhoneNumber(vm.to.substr(0, vm.to.indexOf('@')));
 				vm.formatted.from = monster.util.formatPhoneNumber(vm.from.substr(0, vm.from.indexOf('@')));
 				vm.formatted.callerIDName = monster.util.formatPhoneNumber(vm.caller_id_name);
-				vm.formatted.duration = monster.util.friendlyTimer(vm.length/1000);
+				vm.formatted.duration = monster.util.friendlyTimer(vm.length / 1000);
 				vm.formatted.uri = self.formatVMURI(vmboxId, vm.media_id);
 				vm.formatted.callId = monster.util.getModbID(vm.call_id, vm.timestamp);
 				vm.formatted.mediaId = vm.media_id;
@@ -529,10 +524,9 @@ define(function(require){
 					callback && callback(data.data);
 				},
 				error: function(data, status, globalHandler) {
-					if(data && data.error === '404') {
+					if (data && data.error === '404') {
 						error && error({});
-					}
-					else {
+					} else {
 						globalHandler(data, { generateError: true });
 					}
 				}
@@ -626,7 +620,7 @@ define(function(require){
 		bulkUpdateMessages: function(vmboxId, data, callback) {
 			var self = this;
 
-		self.callApi({
+			self.callApi({
 				resource: 'voicemail.updateMessages',
 				data: {
 					accountId: self.accountId,
