@@ -1,45 +1,76 @@
-<div class="received-voicemails-container monster-table-wrapper empty">
-	<div class="action-bar monster-table-header">
-		<div class="filters basic-actions pull-left">
-			<div class="select-voicemails-wrapper monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.select }}">
-				<li class="dropdown">
-					<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
-						{{#monsterCheckbox}}
-							<input class="main-select-message" type="checkbox"/>
-						{{/monsterCheckbox}}
-						<i class="icon-telicon-caret-down"></i>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="javascript:void(0);" class="select-some-messages" data-type="all">{{ i18n.voicemails.receivedVMs.actionBar.select.all }}</a></li>
-						<li><a href="javascript:void(0);" class="select-some-messages" data-type="new">{{ i18n.voicemails.receivedVMs.actionBar.select.new }}</a></li>
-						<li><a href="javascript:void(0);" class="select-some-messages" data-type="saved">{{ i18n.voicemails.receivedVMs.actionBar.select.listened }}</a></li>
-						<li><a href="javascript:void(0);" class="select-some-messages" data-type="deleted">{{ i18n.voicemails.receivedVMs.actionBar.select.deleted }}</a></li>
-						<li><a href="javascript:void(0);" class="select-some-messages" data-type="none">{{ i18n.voicemails.receivedVMs.actionBar.select.none }}</a></li>
-					</ul>
-				</li>
+<div class="received-voicemails-container empty">
+	<div class="main-header clearfix">
+		<div class="voicemail-selection-wrapper pull-left">
+			<div class="filters vmbox-selector">
+				<div class="select-header">
+					{{ i18n.voicemails.receivedVMs.actionBar.currentlyViewing }}
+				</div>
+				<select class="select-vmbox" id="select_vmbox">
+					<option value="none"></option>
+					{{#each vmboxes}}
+						<option value="{{id}}">{{name}}</option>
+					{{/each}}
+				</select>
+			</div>
+		</div>
+
+		<div class="counts-wrapper pull-left">
+			<div class="count-wrapper" data-type="new">
+				{{ i18n.voicemails.receivedVMs.actionBar.new }}
+				<span class="count-text"></span>
 			</div>
 
-			<div class="filters selected-actions pull-left margin-left">
-				<div class="mark-as-wrapper hidable hidden monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.markAs }}">
+			<div class="count-wrapper" data-type="total">
+				{{ i18n.voicemails.receivedVMs.actionBar.total }}
+				<span class="count-text"></span>
+			</div>
+		</div>
+
+		<a id="refresh_voicemails" class="monster-link pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.refresh }}"><i class="fa fa-refresh"></i></a>
+	</div>
+	<div class="monster-table-wrapper-spaced">
+		<div class="action-bar monster-table-header">
+			<div class="filters basic-actions pull-left">
+				<div class="select-voicemails-wrapper monster-select-dropdown-neutral pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.select }}">
 					<li class="dropdown">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
-							<i class="icon-telicon-prioritize"></i>
-							<i class="icon-telicon-caret-down"></i>
+							{{#monsterCheckbox}}
+								<input class="main-select-message" type="checkbox"/>
+							{{/monsterCheckbox}}
+							<i class="fa fa-caret-down"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:void(0);" class="mark-as-link" data-type="new">{{ i18n.voicemails.receivedVMs.actionBar.markAsNew }}</a></li>
-							<li><a href="javascript:void(0);" class="mark-as-link" data-type="saved">{{ i18n.voicemails.receivedVMs.actionBar.markAsListened }}</a></li>
-							<li><a href="javascript:void(0);" class="mark-as-link" data-type="deleted">{{ i18n.voicemails.receivedVMs.actionBar.markAsDeleted }}</a></li>
-							<li><a href="javascript:void(0);" class="delete-voicemails">{{ i18n.voicemails.receivedVMs.actionBar.delete }}</a></li>
+							<li><a href="javascript:void(0);" class="select-some-messages" data-type="all">{{ i18n.voicemails.receivedVMs.actionBar.select.all }}</a></li>
+							<li><a href="javascript:void(0);" class="select-some-messages" data-type="new">{{ i18n.voicemails.receivedVMs.actionBar.select.new }}</a></li>
+							<li><a href="javascript:void(0);" class="select-some-messages" data-type="saved">{{ i18n.voicemails.receivedVMs.actionBar.select.listened }}</a></li>
+							<li><a href="javascript:void(0);" class="select-some-messages" data-type="deleted">{{ i18n.voicemails.receivedVMs.actionBar.select.deleted }}</a></li>
+							<li><a href="javascript:void(0);" class="select-some-messages" data-type="none">{{ i18n.voicemails.receivedVMs.actionBar.select.none }}</a></li>
 						</ul>
 					</li>
 				</div>
 
-				<div class="move-to-wrapper hidable hidden monster-select-dropdown pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.moveTo }}">
+				<div class="filters selected-actions pull-left margin-left">
+					<div class="mark-as-wrapper hidable hidden monster-select-dropdown-neutral pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.markAs }}">
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
+								<i class="icon-telicon-prioritize"></i>
+								<i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:void(0);" class="mark-as-link" data-type="new"><i class="fa fa-circle monster-green"></i>{{ i18n.voicemails.receivedVMs.actionBar.markAsNew }}</a></li>
+								<li><a href="javascript:void(0);" class="mark-as-link" data-type="saved"><i class="fa fa-circle monster-lightgrey"></i>{{ i18n.voicemails.receivedVMs.actionBar.markAsListened }}</a></li>
+								<li><a href="javascript:void(0);" class="mark-as-link" data-type="deleted"><i class="fa fa-circle monster-red"></i>{{ i18n.voicemails.receivedVMs.actionBar.markAsDeleted }}</a></li>
+								<li><a href="javascript:void(0);" class="delete-voicemails"><i class="fa fa-trash"></i>{{ i18n.voicemails.receivedVMs.actionBar.delete }}</a></li>
+							</ul>
+						</li>
+					</div>
+				</div>
+
+				<div class="move-to-wrapper hidable hidden monster-select-dropdown-neutral pull-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.moveTo }}">
 					<li class="dropdown">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
 							<i class="icon-telicon-forward"></i>
-							<i class="icon-telicon-caret-down"></i>
+							<i class="fa fa-caret-down"></i>
 						</a>
 						<ul class="dropdown-menu vmbox-target">
 							{{#each vmboxes}}
@@ -49,82 +80,62 @@
 					</li>
 				</div>
 			</div>
-		</div>
 
-		<div class="filters vmbox-selector">
-			<select id="select_vmbox">
-				<option value="none"></option>
-				{{#each vmboxes}}
-					<option value="{{id}}">{{name}}</option>
-				{{/each}}
-			</select>
-
-			<button id="refresh_voicemails" class="monster-button-secondary monster-button-fit margin-left" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.voicemails.receivedVMs.actionBar.tooltips.refresh }}">
-				<i class="fa fa-refresh"></i>
-			</button>
-		</div>
-
-		<div class="filter-by-date">
-			<div class="expand-dates">
-				<a class="monster-link blue toggle-filter">{{ i18n.voicemails.receivedVMs.filterByDate }}</a>
-			</div>
-			<div class="date-ranges">
-				<span>{{i18n.startDate}}</span>
-				<input id="startDate" type="text" class="date-filter filter-from">
-				<span>{{i18n.endDate}}</span>
-				<input id="endDate" type="text" class="date-filter filter-to">
-				<button type="button" class="apply-filter monster-button monster-button-primary">{{i18n.filter}}</button>
-				<a class="monster-link blue toggle-filter">{{i18n.cancel}}</a>
+			<div class="filter-by-date">
+				<div class="expand-dates">
+					<a class="monster-link blue toggle-filter">{{ i18n.voicemails.receivedVMs.filterByDate }}</a>
+				</div>
+				<div class="date-ranges">
+					<span>{{i18n.startDate}}</span>
+					<input id="startDate" type="text" class="date-filter filter-from">
+					<i class="fa fa-calendar"></i>
+					<span>{{i18n.endDate}}</span>
+					<input id="endDate" type="text" class="date-filter filter-to">
+					<i class="fa fa-calendar"></i>
+					<button type="button" class="apply-filter monster-button monster-button-fit">{{i18n.filter}}</button>
+					<a class="monster-link blue toggle-filter">{{i18n.cancel}}</a>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="content">
-		<div class="empty-state">
-			<i class="icon-title icon-telicon-voicemail"></i>
-			<div class="headline">{{ i18n.voicemails.receivedVMs.empty.headline }}</div>
-			<div class="vmboxes-list">
-				<table class="monster-table footable">
-					<thead>
-						<tr>
-							<th data-breakpoints="xs">{{ i18n.voicemails.receivedVMs.table.columns.name }}</th>
-						</tr>
-					</thead>
-					<tbody>
+		<div class="content">
+			<div class="empty-state">
+				<div class="headline">{{ i18n.voicemails.receivedVMs.empty.headline1 }}<span class="count">{{count}}</span>{{ i18n.voicemails.receivedVMs.empty.headline2 }}</div>
+				<div class="sub-headline">{{ i18n.voicemails.receivedVMs.empty.subHeadline }}</div>
+
+				<div class="vmboxes-list">
+					<select class="select-vmbox" id="select_vmbox_empty">
+						<option value="none"></option>
 						{{#each vmboxes}}
-							<tr class="box-row" data-id="{{id}}">
-								<td>
-									{{name}}
-								</td>
-							</tr>
+							<option class="box-row" data-id="{{id}}" value="{{id}}">{{name}}</option>
 						{{/each}}
-					</tbody>
-				</table>
+					</select>
+				</div>
 			</div>
-		</div>
-		<div class="data-state">
-			<div class="voicemails-table">
-				<table class="monster-table footable" id="voicemails_table">
-					<thead>
-						<tr>
-							<th data-type="html" data-sortable="false"></th>
-							<th>{{ i18n.voicemails.receivedVMs.table.columns.status }}</th>
-							<!--<th>{{ i18n.voicemails.receivedVMs.table.columns.callId }}</th>-->
-							<th data-type="html" data-sorted="true" data-direction="DESC">{{ i18n.voicemails.receivedVMs.table.columns.received }}</th>
-							<th data-type="html">{{ i18n.voicemails.receivedVMs.table.columns.from }}</th>
-							<th data-type="html">{{ i18n.voicemails.receivedVMs.table.columns.targetNumber }}</th>
-							<th data-breakpoints="xs">{{ i18n.voicemails.receivedVMs.table.columns.duration }}</th>
-							<th data-filterable="false" data-type="html" data-sortable="false"></th>
-						</tr>
-					</thead>
-					<tbody>
+			<div class="data-state">
+				<div class="voicemails-table">
+					<table class="monster-table footable" id="voicemails_table">
+						<thead>
+							<tr>
+								<th class="select-cell" data-type="html" data-sortable="false"></th>
+								<th>{{ i18n.voicemails.receivedVMs.table.columns.status }}</th>
+								<!--<th>{{ i18n.voicemails.receivedVMs.table.columns.callId }}</th>-->
+								<th data-type="html" data-sorted="true" data-direction="DESC">{{ i18n.voicemails.receivedVMs.table.columns.received }}</th>
+								<th data-type="html">{{ i18n.voicemails.receivedVMs.table.columns.from }}</th>
+								<th data-type="html">{{ i18n.voicemails.receivedVMs.table.columns.targetNumber }}</th>
+								<th data-breakpoints="xs">{{ i18n.voicemails.receivedVMs.table.columns.duration }}</th>
+								<th data-filterable="false" data-type="html" data-sortable="false"></th>
+							</tr>
+						</thead>
+						<tbody>
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-		<div class="loading-state">
-			<i class="fa fa-spin fa-spinner monster-primary-color"></i>
+			<div class="loading-state">
+				<i class="fa fa-spin fa-spinner monster-primary-color"></i>
+			</div>
 		</div>
 	</div>
 </div>
