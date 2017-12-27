@@ -20,8 +20,9 @@
 				"emptyRow": "There are no messages stored in the selected Voicemail Box"
 			},
 			"empty": {
-				"headline": "In order to view and manage voicemails, first select a voicemail box in the table below.",
-				"subtitle": "Use the 'Select a Voicemail Box' above and to the left."
+				"headline1": "There are ",
+				"headline2": "voicemail boxes recognized on this account",
+				"subHeadline": "Select a box to manage the voicemails it contains."
 			},
 			"actionBar": {
 				"select": {
@@ -46,7 +47,10 @@
 					"moveTo": "Move To",
 					"delete": "This will remove the selected voicemails from the database and they won't be retrievable afterwards."
 				},
-				"delete": "Delete"
+				"delete": "Delete",
+				"currentlyViewing": "Currently Viewing",
+				"new": "New:",
+				"total": "Total:"
 			},
 			"status": {
 				"saved": "Listened",

@@ -1,17 +1,20 @@
 {{#each voicemails}}
 	<tr class="voicemail-row" data-media-id="{{formatted.mediaId}}" data-call-id="{{formatted.callId}}" data-timestamp="{{timestamp}}" data-folder="{{folder}}">
-		<td data-filter-value="{{formatted.callId}}">
+		<td style="width:20px;" class="select-cell" data-filter-value="{{formatted.callId}}">
 			{{#monsterCheckbox}}
 				<input class="select-message" type="checkbox" data-media-id="{{formatted.mediaId}}"/>
 			{{/monsterCheckbox}}
 		</td>
 		<td class="status select-line" data-folder="{{folder}}">{{tryI18n @root.i18n.voicemails.receivedVMs.status folder}}</td>
 		<!--<td class="select-line">{{call_id}}</td>-->
-		<td class="select-line" data-filter-value="{{timestamp}} {{toFriendlyDate timestamp}}" data-sort-value="{{timestamp}}">{{toFriendlyDate timestamp}}</td>
+		<td class="select-line no-padding" data-filter-value="{{timestamp}} {{toFriendlyDate timestamp}}" data-sort-value="{{timestamp}}">
+			<div class="top-line">{{toFriendlyDate timestamp 'date'}}</div>
+			<div class="bottom-line">{{toFriendlyDate timestamp 'time'}}</div>
+		</td>
 		{{#if formatted.showCallerIDName}}
 			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}">
-				<div class="top-line">{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}</div>
-				<div class="bottom-line">{{#monsterNumberWrapper formatted.callerIDName}}{{/monsterNumberWrapper}}</div>
+				<div class="top-line">{{#monsterNumberWrapper formatted.callerIDName}}{{/monsterNumberWrapper}}</div>
+				<div class="bottom-line">{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}</div>
 			</td>
 		{{else}}
 			<td class="select-line" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}">
@@ -21,7 +24,7 @@
 		<td class="select-line" data-filter-value="{{to}} {{formatted.to}}">{{#monsterNumberWrapper formatted.to}}{{/monsterNumberWrapper}}</td>
 		<td class="duration select-line">{{formatted.duration}}</td>
 		<td class="actions">
-			<i class="fa fa-play action-item play-vm"></i>
+			<i class="fa fa-play-circle action-item play-vm"></i>
 			<a class="action-item" href="{{formatted.uri}}" target="_blank">
 				<i class="fa fa-download download-vm"></i>
 			</a>

@@ -1,28 +1,111 @@
+@import "../../../css/partials/base";
+
 /* Default empty state */
 .received-voicemails-container.empty .empty-state {
 	display: block;
 }
 
 .received-voicemails-container .empty-state {
-	background: #FFF;
-	border: 1px dashed #ccc;
 	display: none;
-	padding: 0 10px 40px;
 	text-align: center;
 }
 
-.received-voicemails-container .empty-state .icon-title {
-	color: #333;
-	font-size: 148px;
-}
-
 .received-voicemails-container .empty-state .headline {
-	margin-top: -10px;
+	font-size: 22px;
+	margin-top: 35px;
 }
 
-.received-voicemails-container .empty-state .subtitle {
-	margin-top :10px;
-	color: #909099;
+.received-voicemails-container .empty-state .sub-headline {
+	color: #606069;
+	font-size: 16px;
+	margin-top: 13px;
+}
+
+.received-voicemails-container .empty-state .count {
+	font-weight: bold;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.received-voicemails-container .empty-state .vmboxes-list {
+	margin-top: 30px;
+	width: 450px;
+	text-align: left;
+}
+
+.received-voicemails-container .empty-state .chosen-drop {
+	width: 450px;
+}
+
+.received-voicemails-container .empty-state .chosen-container > a,
+.received-voicemails-container .main-header .chosen-container > a {
+	height: 40px;
+	line-height: 40px;
+	width: 450px;
+}
+
+.received-voicemails-container .main-header {
+	margin-bottom: 25px;
+}
+
+.received-voicemails-container .main-header .select-header {
+	color: #606069;
+	margin-bottom: 5px;
+}
+
+.received-voicemails-container .main-header .chosen-drop,
+.received-voicemails-container .main-header .chosen-container > a,
+.received-voicemails-container .main-header .vmboxes-list,
+.received-voicemails-container .main-header .vmbox-selector {
+	width: 300px;
+}
+
+.received-voicemails-container .main-header > * {
+	display: inline-block;
+	margin-right: 25px;
+}
+
+.received-voicemails-container .main-header #refresh_voicemails {
+	margin-top: 35px;
+}
+
+.received-voicemails-container .main-header .vmbox-selector .chosen-container .chosen-single span {
+	font-size: 18px;
+}
+
+.received-voicemails-container .main-header .counts-wrapper {
+	background: #FFF;
+	border: 1px solid $input-border-color;
+	border-radius: 2px;
+	margin-right: 25px;
+	margin-top: 24px;
+}
+
+.received-voicemails-container .main-header .counts-wrapper .count-wrapper {
+	color: #606069;
+	display: inline-block;
+	height: 26px;
+	padding: 5px;
+	text-align: center;
+	width: 70px;
+}
+
+.received-voicemails-container .main-header .counts-wrapper .count-wrapper .count-text {
+	font-size: 24px;
+	color: #333;
+	padding-left: 7px;
+}
+
+.received-voicemails-container .main-header .counts-wrapper .count-wrapper[data-type="new"] {
+	border-top: 3px solid $success-color;
+}
+
+.received-voicemails-container .main-header .counts-wrapper .count-wrapper[data-type="new"] .count-text {
+	color: $success-color;
+}
+
+.received-voicemails-container .main-header .counts-wrapper .count-wrapper:not(:last-child) {
+	border-right: 1px solid $input-border-color;
 }
 
 .received-voicemails-container .data-state {
@@ -58,7 +141,7 @@
 /* Action Bar */
 .received-voicemails-container.empty .filters.search,
 .received-voicemails-container.empty .filters.basic-actions > *,
-.received-voicemails-container.empty #refresh_voicemails {
+.received-voicemails-container.empty .main-header {
 	display: none;
 }
 
@@ -81,10 +164,6 @@
 
 .received-voicemails-container .action-bar .margin-left {
 	margin-left: 10px;
-}
-
-.received-voicemails-container .action-bar .vmbox-selector {
-	display: inline-block;
 }
 
 .received-voicemails-container .action-bar #select_voicemails {
@@ -111,11 +190,6 @@
 
 .received-voicemails-container .action-bar .custom-range > span {
 	margin-right: 5px;
-}
-
-.received-voicemails-container .action-bar .custom-range input.date-filter {
-	height: 24px;
-	width: 80px;
 }
 
 /* Table */
@@ -159,6 +233,11 @@
 
 .received-voicemails-container .voicemails-table .select-line {
 	cursor: pointer;
+}
+
+.received-voicemails-container .voicemails-table tr .bottom-line {
+	color: #707079;
+	font-size: 12px;
 }
 
 .received-voicemails-container .voicemails-table td.no-padding {
@@ -205,12 +284,6 @@
 	padding: 3px 12px;
 }
 
-
-/*.received-voicemails-container .date-ranges {
-	float: right;
-	margin-left: 60px;
-}*/
-
 .received-voicemails-container .date-ranges > * {
 	margin: 0 10px 0 0;
 	vertical-align: middle;
@@ -222,7 +295,12 @@
 
 .received-voicemails-container .date-ranges input.date-filter {
 	height: 24px;
-	width: 80px;
+	width: 90px;
+}
+
+.received-voicemails-container .date-ranges i.fa-calendar {
+	margin-left: -30px;
+	margin-right: 20px;
 }
 
 .received-voicemails-container .filter-by-date {
