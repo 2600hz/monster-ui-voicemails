@@ -147,7 +147,6 @@
 
 .received-voicemails-container .filters.basic-actions {
 	display: inline-block;
-	width: 270px;
 }
 
 .received-voicemails-container:not(.empty) .action-bar {
@@ -212,6 +211,10 @@
 
 .received-voicemails-container .voicemails-table table.highlighted tbody tr.active {
 	opacity: 1;
+}
+
+.received-voicemails-container .voicemails-table .select-cell {
+	min-width: 20px !important;
 }
 
 .received-voicemails-container .voicemails-table .status {
