@@ -20,7 +20,7 @@
 				"emptyRow": "There are no messages stored in the selected Voicemail Box"
 			},
 			"empty": {
-				"headline1": "There are ",
+				"headline1": "There are",
 				"headline2": "voicemail boxes recognized on this account",
 				"subHeadline": "Select a box to manage the voicemails it contains."
 			},
