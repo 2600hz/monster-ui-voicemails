@@ -459,7 +459,7 @@ define(function(require) {
 						voicemails: formattedData.voicemails
 					},
 					$rows = $(monster.template(self, 'voicemails-rows', dataTemplate));
-
+console.log(dataTemplate, $rows);
 				callback && callback($rows, data, formattedData);
 			});
 		},

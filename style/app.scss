@@ -23,8 +23,8 @@
 
 .received-voicemails-container .empty-state .count {
 	font-weight: bold;
-	margin-left: 3px;
-	margin-right: 3px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .received-voicemails-container .empty-state .vmboxes-list {
@@ -129,15 +129,6 @@
 	width: 400px;
 }
 
-.received-voicemails-container .vmboxes-list td,
-.received-voicemails-container .vmboxes-list .footable-header th {
-	text-align: left !important;
-}
-
-.received-voicemails-container .vmboxes-list td:hover {
-	background: #FAFAFA;
-	cursor: pointer;
-}
 /* Action Bar */
 .received-voicemails-container.empty .filters.search,
 .received-voicemails-container.empty .filters.basic-actions > *,
@@ -165,11 +156,6 @@
 	margin-left: 10px;
 }
 
-.received-voicemails-container .action-bar #select_voicemails {
-	width: 105px;
-	margin-bottom: 0;
-}
-
 .received-voicemails-container .action-bar .hidable {
 	display: inline-block;
 }
@@ -182,22 +168,9 @@
 	margin-left: 10px;
 }
 
-.received-voicemails-container .action-bar .custom-range > * {
-	margin: 0 10px 0 0;
-	vertical-align: middle;
-}
-
-.received-voicemails-container .action-bar .custom-range > span {
-	margin-right: 5px;
-}
-
 /* Table */
 .received-voicemails-container .voicemails-table table {
 	margin-top: 0;
-}
-
-.received-voicemails-container .voicemails-table table .footable-header th:nth-child(1) {
-	min-width: 77px;
 }
 
 .received-voicemails-container .voicemails-table tbody tr > td:first-child .monster-checkbox {
@@ -221,19 +194,6 @@
 	text-transform: uppercase;
 }
 
-.received-voicemails-container .voicemails-table .status[data-folder="new"] {
-	color: #33DB24;
-	font-weight: bold;
-}
-
-.received-voicemails-container .voicemails-table .status[data-folder="saved"] {
-	color: #AAA;
-}
-
-.received-voicemails-container .voicemails-table .status[data-folder="deleted"] {
-	color: #e01a00;
-}
-
 .received-voicemails-container .voicemails-table .select-line {
 	cursor: pointer;
 }
@@ -245,10 +205,6 @@
 
 .received-voicemails-container .voicemails-table td.no-padding {
 	padding: 0;
-}
-
-.received-voicemails-container .voicemails-table .empty-vm-row td {
-	text-align: center !important;
 }
 
 .received-voicemails-container .dropdown-menu.vmbox-target {
@@ -287,21 +243,21 @@
 	padding: 3px 12px;
 }
 
-.received-voicemails-container .date-ranges > * {
+.received-voicemails-container .filter-by-date .date-ranges > * {
 	margin: 0 10px 0 0;
 	vertical-align: middle;
 }
 
-.received-voicemails-container .date-ranges > span {
+.received-voicemails-container .filter-by-date .date-ranges > span {
 	margin-right: 5px;
 }
 
-.received-voicemails-container .date-ranges input.date-filter {
+.received-voicemails-container .filter-by-date .date-ranges input.date-filter {
 	height: 24px;
 	width: 90px;
 }
 
-.received-voicemails-container .date-ranges i.fa-calendar {
+.received-voicemails-container .filter-by-date .date-ranges i.fa-calendar {
 	margin-left: -30px;
 	margin-right: 20px;
 }
