@@ -5,7 +5,19 @@
 				<input class="select-message" type="checkbox" data-media-id="{{formatted.mediaId}}"/>
 			{{/monsterCheckbox}}
 		</td>
-		<td class="status select-line" data-folder="{{folder}}">{{tryI18n @root.i18n.voicemails.receivedVMs.status folder}}</td>
+		<td class="status select-line" data-folder="{{folder}}">
+			{{#compare folder "===" "new"}}
+				<span class="monster-badge-success">
+			{{else}}
+				{{#compare folder "===" "deleted"}}
+					<span class="monster-badge-danger">
+				{{else}}
+					<span class="monster-badge-neutral">
+				{{/compare}}
+			{{/compare}}
+				{{tryI18n @root.i18n.voicemails.receivedVMs.status folder}}
+			</span>
+		</td>
 		<!--<td class="select-line">{{call_id}}</td>-->
 		<td class="select-line no-padding" data-filter-value="{{timestamp}} {{toFriendlyDate timestamp}}" data-sort-value="{{timestamp}}">
 			<div class="top-line">{{toFriendlyDate timestamp 'date'}}</div>
