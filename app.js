@@ -202,7 +202,9 @@ define(function(require) {
 			monster.ui.tooltips(template);
 			monster.ui.footable(template.find('.footable'));
 
-			$selectVMBox.chosen({ search_contains: true, placeholder_text_single: self.i18n.active().voicemails.receivedVMs.actionBar.selectVM.none });
+			monster.ui.chosen($selectVMBox, {
+				placeholder_text_single: self.i18n.active().voicemails.receivedVMs.actionBar.selectVM.none
+			});
 
 			$selectVMBox.on('change', function() {
 				var vmboxId = $(this).val();
