@@ -1,8 +1,7 @@
 define(function(require) {
 	var $ = require('jquery'),
 		_ = require('lodash'),
-		monster = require('monster'),
-		chosen = require('chosen');
+		monster = require('monster');
 
 	var app = {
 		name: 'voicemails',
