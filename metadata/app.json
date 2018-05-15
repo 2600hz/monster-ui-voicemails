@@ -2,7 +2,7 @@
 	"name": "voicemails",
 	"i18n": {
 		"en-US": {
-			"label": "Voicemail Manager",
+			"label": "Voicemails",
 			"description": "This app allows you to quickly and easily manage the contents of your voicemail box. In addition, it allows you to access your voicemails remotely, as well as download, delete, retrieve, view CRD details and more. Your admins can filter by account, number, or voicemail box, search by date range, sort columns, and/or play and download voicemail media. Admins may select all voicemails in an account or voicemail box, bulk delete old voicemails by voicemail box or account, change voicemail statuses and/or copy voicemails to another voicemail box.",
 			"extended_description": "",
 			"features": [
@@ -15,13 +15,13 @@
 		}
 	},
 	"tags": [
-		"reseller"
+		"admin"
 	],
 	"icon": "Voicemail_app.png",
 	"api_url": "http://10.26.0.41:8000/v2",
 	"author": "2600Hz",
 	"version": "1.0",
-	"license": "-", 
+	"license": "-",
 	"price": 0,
 	"screenshots": [
 		"PlayVoicemail.png",
