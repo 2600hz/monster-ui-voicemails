@@ -114,7 +114,10 @@ define(function(require) {
 
 			self.getStorage(function(storage) {
 				var formattedData = self.storageFormatData(storage),
-					template = $(monster.template(self, 'storage', formattedData));
+					template = $(self.getTemplate({
+						name: 'storage',
+						data: formattedData
+					}));
 
 				self.storageBindEvents(template);
 
@@ -152,7 +155,10 @@ define(function(require) {
 						vmboxes: vmboxes,
 						count: vmboxes.length
 					},
-					template = $(monster.template(self, 'received-voicemails', dataTemplate));
+					template = $(self.getTemplate({
+						name: 'received-voicemails',
+						data: dataTemplate
+					}));
 
 				self.voicemailsInitDatePicker(parent, template);
 
@@ -328,7 +334,9 @@ define(function(require) {
 					callId = $row.data('call-id');
 
 				self.getCDR(callId, function(cdr) {
-					var template = $(monster.template(self, 'voicemails-CDRDialog'));
+					var template = $(self.getTemplate({
+						name: 'voicemails-CDRDialog'
+					}));
 
 					monster.ui.renderJSON(cdr, template.find('#jsoneditor'));
 
@@ -424,7 +432,10 @@ define(function(require) {
 				dataTemplate = {
 					uri: uri
 				},
-				templateCell = $(monster.template(self, 'cell-voicemail-player', dataTemplate));
+				templateCell = $(self.getTemplate({
+					name: 'cell-voicemail-player',
+					data: dataTemplate
+				}));
 
 			// If folder is new, we want to change it to saved
 			if ($row.data('folder') === 'new') {
@@ -460,8 +471,11 @@ define(function(require) {
 					dataTemplate = {
 						voicemails: formattedData.voicemails
 					},
-					$rows = $(monster.template(self, 'voicemails-rows', dataTemplate));
-console.log(dataTemplate, $rows);
+					$rows = $(self.getTemplate({
+						name: 'voicemails-rows',
+						data: dataTemplate
+					}));
+
 				callback && callback($rows, data, formattedData);
 			});
 		},
