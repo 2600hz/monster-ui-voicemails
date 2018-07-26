@@ -1,6 +1,18 @@
 {
 	"name": "voicemails",
 	"i18n": {
+		"de-DE": {
+			"label": "Voicemails",
+			"description": "Mit dieser App können Sie den Inhalt Ihrer Voicemailbox schnell und bequem verwalten. Außerdem können Sie mit dieser App auch remote auf Ihre Voicemails zugreifen sowie EVN-Details herunterladen, abrufen, anzeigen und vieles mehr. Ihre Administratoren können nach Account, Nummer oder Voicemailbox filtern, nach bestimmten Datumsbereichen suchen, Spalten sortieren und/oder Voicemail-Medien abspielen und herunterladen. Administratoren können alle in einem Account oder einer Voicemailbox befindlichen Voicemails auswählen, alte Voicemails aus ganzen Voicemailboxen oder Accounts löschen, den Voicemail-Status ändern und/oder Voicemails in eine andere Voicemailbox kopieren.",
+			"extended_description": "",
+			"features": [
+				"Voicemails verschieben und Status ändern",
+				"Voicemail abspielen",
+				"Voicemail herunterladen",
+				"Voicemail-Details anzeigen",
+				"Massenhafte Statusänderungen"
+			]
+		},
 		"en-US": {
 			"label": "Voicemails",
 			"description": "This app allows you to quickly and easily manage the contents of your voicemail box. In addition, it allows you to access your voicemails remotely, as well as download, delete, retrieve, view CRD details and more. Your admins can filter by account, number, or voicemail box, search by date range, sort columns, and/or play and download voicemail media. Admins may select all voicemails in an account or voicemail box, bulk delete old voicemails by voicemail box or account, change voicemail statuses and/or copy voicemails to another voicemail box.",
