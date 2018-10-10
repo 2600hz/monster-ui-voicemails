@@ -1,7 +1,7 @@
 {
     "voicemails": {
         "menuTitles": {
-            "receivedVMs": "Empfangene Voicemails",
+            "receivedVMs": "Empfangene Sprachnachrichten",
             "storage": "Speicher"
         },
         "receivedVMs": {
@@ -24,11 +24,11 @@
                     "none": "Keine"
                 },
                 "selectVM": {
-                    "none": "Eine Voicemailbox auswählen"
+                    "none": "Einen Anrufbeantworter auswählen"
                 },
                 "to": "An",
                 "tooltips": {
-                    "delete": "Dadurch werden die ausgewählten Voicemails aus der Datenbank entfernt und können danach auch nicht mehr abgehört werden.",
+                    "delete": "Dadurch werden die ausgewählten Spachnachrichten aus der Datenbank entfernt und können danach auch nicht mehr abgehört werden.",
                     "markAs": "Markieren als",
                     "moveTo": "Verschieben nach",
                     "refresh": "Aktualisieren",
@@ -38,8 +38,8 @@
             },
             "empty": {
                 "headline1": "Es gibt",
-                "headline2": "Voicemailboxes für dieses Konto",
-                "subHeadline": "Wählen Sie eine Box aus"
+                "headline2": "Anrufbeantworter für dieses Konto",
+                "subHeadline": "Wählen Sie einen Anrufbeantworter aus, um die darin befindlichen Sprachnachrichten zu verwalten."
             },
             "filterByDate": "Nach Datum filtern",
             "noCDR": "Wir haben keinen zugehörigen EVN-Datensatz zu dieser Nachricht gefunden. Wenn es sich um eine alte Nachricht handelte",
@@ -58,7 +58,7 @@
                     "status": "Status",
                     "targetNumber": "Zielnummer"
                 },
-                "emptyRow": "In der ausgewählten Voicemailbox sind keine Nachrichten gespeichert"
+                "emptyRow": "Im ausgewählten Anrufbeantworter sind keine Nachrichten gespeichert"
             }
         },
         "title": "Voicemail-Manager"
