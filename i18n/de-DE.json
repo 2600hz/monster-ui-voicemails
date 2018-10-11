@@ -1,66 +1,66 @@
 {
-    "voicemails": {
-        "menuTitles": {
-            "receivedVMs": "Empfangene Voicemails",
-            "storage": "Speicher"
-        },
-        "receivedVMs": {
-            "CDRPopup": {
-                "title": "EVN-Details"
-            },
-            "actionBar": {
-                "currentlyViewing": "Derzeit angezeigt",
-                "delete": "Löschen",
-                "from": "Von",
-                "markAsDeleted": "Als gelöscht markieren",
-                "markAsListened": "Als gehört markieren",
-                "markAsNew": "Als neu markieren",
-                "new": "Neu:",
-                "select": {
-                    "all": "Alle auf Seite",
-                    "deleted": "Gelöscht",
-                    "listened": "Gehört",
-                    "new": "Neu",
-                    "none": "Keine"
-                },
-                "selectVM": {
-                    "none": "Eine Voicemailbox auswählen"
-                },
-                "to": "An",
-                "tooltips": {
-                    "delete": "Dadurch werden die ausgewählten Voicemails aus der Datenbank entfernt und können danach auch nicht mehr abgehört werden.",
-                    "markAs": "Markieren als",
-                    "moveTo": "Verschieben nach",
-                    "refresh": "Aktualisieren",
-                    "select": "Auswählen"
-                },
-                "total": "Insgesamt:"
-            },
-            "empty": {
-                "headline1": "Es gibt",
-                "headline2": "Voicemailboxes für dieses Konto",
-                "subHeadline": "Wählen Sie eine Box aus"
-            },
-            "filterByDate": "Nach Datum filtern",
-            "noCDR": "Wir haben keinen zugehörigen EVN-Datensatz zu dieser Nachricht gefunden. Wenn es sich um eine alte Nachricht handelte",
-            "status": {
-                "deleted": "Gelöscht",
-                "new": "Neu",
-                "saved": "Gehört"
-            },
-            "table": {
-                "columns": {
-                    "callId": "Anruf-ID",
-                    "duration": "Dauer",
-                    "from": "Von",
-                    "name": "Name",
-                    "received": "Empfangen",
-                    "status": "Status",
-                    "targetNumber": "Zielnummer"
-                },
-                "emptyRow": "In der ausgewählten Voicemailbox sind keine Nachrichten gespeichert"
-            }
-        },
-        "title": "Voicemail-Manager"
-    }
+	"voicemails": {
+		"menuTitles": {
+			"receivedVMs": "Empfangene Sprachnachrichten",
+			"storage": "Speicher"
+		},
+		"receivedVMs": {
+			"actionBar": {
+				"to": "An",
+				"delete": "Löschen",
+				"tooltips": {
+					"refresh": "Aktualisieren",
+					"delete": "Dadurch werden die ausgewählten Spachnachrichten aus der Datenbank entfernt und können danach auch nicht mehr abgehört werden.",
+					"moveTo": "Verschieben nach",
+					"select": "Auswählen",
+					"markAs": "Markieren als"
+				},
+				"markAsDeleted": "Als gelöscht markieren",
+				"markAsListened": "Als gehört markieren",
+				"new": "Neu:",
+				"selectVM": {
+					"none": "Einen Anrufbeantworter auswählen"
+				},
+				"select": {
+					"deleted": "Gelöscht",
+					"listened": "Gehört",
+					"all": "Alle auf Seite",
+					"none": "Keine",
+					"new": "Neu"
+				},
+				"currentlyViewing": "Derzeit angezeigt",
+				"markAsNew": "Als neu markieren",
+				"from": "Von",
+				"total": "Insgesamt:"
+			},
+			"status": {
+				"deleted": "Gelöscht",
+				"new": "Neu",
+				"saved": "Gehört"
+			},
+			"table": {
+				"columns": {
+					"from": "Von",
+					"duration": "Dauer",
+					"name": "Name",
+					"targetNumber": "Zielnummer",
+					"status": "Status",
+					"callId": "Anruf-ID",
+					"received": "Empfangen"
+				},
+				"emptyRow": "Im ausgewählten Anrufbeantworter sind keine Nachrichten gespeichert"
+			},
+			"empty": {
+				"headline1": "Es gibt",
+				"headline2": "Anrufbeantworter für dieses Konto",
+				"subHeadline": "Wählen Sie einen Anrufbeantworter aus"
+			},
+			"filterByDate": "Nach Datum filtern",
+			"CDRPopup": {
+				"title": "EVN-Details"
+			},
+			"noCDR": "Wir haben keinen zugehörigen EVN-Datensatz zu dieser Nachricht gefunden. Wenn es sich um eine alte Nachricht handelte"
+		},
+		"title": "Voicemail-Manager"
+	}
 }
