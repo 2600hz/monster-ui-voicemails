@@ -323,11 +323,9 @@ define(function(require) {
 				e.stopPropagation();
 
 				var vmboxId = template.find('#select_vmbox').val(),
-					mediaId = $row.data('media-id'),
-					$table = template.find('table');
+					mediaId = $row.data('media-id');
 
-				$table.find('.select-message').prop('disabled', true);
-				$table.addClass('highlighted');
+				template.find('table').addClass('highlighted');
 				$row.addClass('active');
 
 				self.playVoicemail(template, vmboxId, mediaId);
@@ -350,7 +348,7 @@ define(function(require) {
 				});
 			});
 
-			function afterSelect() {
+			var afterSelect = function() {
 				if (template.find('.select-message:checked').length) {
 					template.find('.hidable').removeClass('hidden');
 					template.find('.main-select-message').prop('checked', true);
@@ -358,13 +356,9 @@ define(function(require) {
 					template.find('.hidable').addClass('hidden');
 					template.find('.main-select-message').prop('checked', false);
 				}
-			}
+			};
 
 			template.on('change', '.select-message', function() {
-				if (template.find('table').hasClass('highlighted')) {
-					return;
-				}
-
 				afterSelect();
 			});
 
@@ -410,9 +404,7 @@ define(function(require) {
 			$activeRows.find('.voicemail-player').remove();
 			$activeRows.find('.duration, .actions').show();
 			$activeRows.removeClass('active');
-			var $table = template.find('table');
-			$table.find('.select-message').prop('disabled', false);
-			$table.removeClass('highlighted');
+			template.find('table').removeClass('highlighted');
 		},
 
 		formatVMURI: function(vmboxId, mediaId) {
@@ -423,11 +415,9 @@ define(function(require) {
 
 		playVoicemail: function(template, vmboxId, mediaId) {
 			var self = this,
-				$row = template.find('.voicemail-row[data-media-id="' + mediaId + '"]'),
-				$table = template.find('table');
+				$row = template.find('.voicemail-row[data-media-id="' + mediaId + '"]');
 
-			$table.find('.select-message').prop('disabled', true);
-			$table.addClass('highlighted');
+			template.find('table').addClass('highlighted');
 			$row.addClass('active');
 
 			$row.find('.duration, .actions').hide();
