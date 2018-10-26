@@ -312,21 +312,25 @@ define(function(require) {
 				});
 			});
 
-			template.on('click', '.play-vm', function() {
+			template.on('click', '.play-vm', function(e) {
 				var $row = $(this).parents('.voicemail-row'),
 					$activeRows = template.find('.voicemail-row.active');
 
-				if ($row.hasClass('active') || $activeRows.length === 0) {
-					var vmboxId = template.find('#select_vmbox').val(),
-						mediaId = $row.data('media-id');
-
-					template.find('table').addClass('.highlighted');
-					$row.addClass('active');
-
-					self.playVoicemail(template, vmboxId, mediaId);
-				} else {
-					self.removeOpacityLayer(template);
+				if (!$row.hasClass('active') && $activeRows.length !== 0) {
+					return;
 				}
+
+				e.stopPropagation();
+
+				var vmboxId = template.find('#select_vmbox').val(),
+					mediaId = $row.data('media-id'),
+					$table = template.find('table');
+
+				$table.find('.select-message').prop('disabled', true);
+				$table.addClass('highlighted');
+				$row.addClass('active');
+
+				self.playVoicemail(template, vmboxId, mediaId);
 			});
 
 			template.on('click', '.details-vm', function() {
@@ -346,15 +350,6 @@ define(function(require) {
 				});
 			});
 
-			template.on('click', '.voicemail-row', function(e) {
-				var $table = template.find('table'),
-					$clickedRow = $(this);
-
-				if ($table.hasClass('highlighted') && !$clickedRow.hasClass('active')) {
-					self.removeOpacityLayer(template);
-				}
-			});
-
 			function afterSelect() {
 				if (template.find('.select-message:checked').length) {
 					template.find('.hidable').removeClass('hidden');
@@ -365,7 +360,11 @@ define(function(require) {
 				}
 			}
 
-			template.on('click', '.select-message', function() {
+			template.on('change', '.select-message', function() {
+				if (template.find('table').hasClass('highlighted')) {
+					return;
+				}
+
 				afterSelect();
 			});
 
@@ -396,6 +395,10 @@ define(function(require) {
 			});
 
 			template.on('click', '.select-line', function() {
+				if (template.find('table').hasClass('highlighted')) {
+					return;
+				}
+
 				var cb = $(this).parents('.voicemail-row').find('.select-message');
 
 				cb.prop('checked', !cb.prop('checked'));
@@ -403,13 +406,12 @@ define(function(require) {
 			});
 		},
 
-		removeOpacityLayer: function(template) {
-			var $activeRows = template.find('.voicemail-row.active'),
-				$table = template.find('table');
-
+		removeOpacityLayer: function(template, $activeRows) {
 			$activeRows.find('.voicemail-player').remove();
 			$activeRows.find('.duration, .actions').show();
 			$activeRows.removeClass('active');
+			var $table = template.find('table');
+			$table.find('.select-message').prop('disabled', false);
 			$table.removeClass('highlighted');
 		},
 
@@ -421,9 +423,11 @@ define(function(require) {
 
 		playVoicemail: function(template, vmboxId, mediaId) {
 			var self = this,
-				$row = template.find('.voicemail-row[data-media-id="' + mediaId + '"]');
+				$row = template.find('.voicemail-row[data-media-id="' + mediaId + '"]'),
+				$table = template.find('table');
 
-			template.find('table').addClass('highlighted');
+			$table.find('.select-message').prop('disabled', true);
+			$table.addClass('highlighted');
 			$row.addClass('active');
 
 			$row.find('.duration, .actions').hide();
@@ -449,15 +453,23 @@ define(function(require) {
 				});
 			}
 
-			templateCell.find('.close-player').on('click', function() {
-				$row.find('.voicemail-player').remove();
-				$row.find('.duration, .actions').show();
-
-				template.find('table').removeClass('highlighted');
-				$row.removeClass('active');
-			});
-
 			$row.append(templateCell);
+
+			var closePlayerOnClickOutside = function(e) {
+					if ($(e.target).closest('.voicemail-player').length) {
+						return;
+					}
+					e.stopPropagation();
+					closePlayer();
+				},
+				closePlayer = function() {
+					$(document).off('click', closePlayerOnClickOutside);
+					self.removeOpacityLayer(template, $row);
+				};
+
+			$(document).on('click', closePlayerOnClickOutside);
+
+			templateCell.find('.close-player').on('click', closePlayer);
 
 			// Autoplay in JS. For some reason in HTML, we can't pause the stream properly for the first play.
 			templateCell.find('audio').get(0).play();
