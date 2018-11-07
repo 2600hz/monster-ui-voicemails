@@ -24,7 +24,7 @@
 			<div class="bottom-line">{{toFriendlyDate timestamp 'time'}}</div>
 		</td>
 		{{#if formatted.showCallerIDName}}
-			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}" data-sort-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}" >
+			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}" data-sort-value="{{formatted.from}} {{ formatted.callerIDName }}" >
 				<div class="top-line">{{#monsterNumberWrapper formatted.callerIDName}}{{/monsterNumberWrapper}}</div>
 				<div class="bottom-line">{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}</div>
 			</td>
