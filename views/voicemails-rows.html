@@ -6,7 +6,7 @@
 			{{/monsterCheckbox}}
 			<div class="disable-cell-content"></div>
 		</td>
-		<td class="status select-line" data-folder="{{folder}}">
+		<td class="status select-line" data-folder="{{folder}}" data-sort-value="{{folder}}">
 			{{#compare folder "===" "new"}}
 				<span class="monster-badge-success">
 			{{else}}
@@ -25,16 +25,16 @@
 			<div class="bottom-line">{{toFriendlyDate timestamp 'time'}}</div>
 		</td>
 		{{#if formatted.showCallerIDName}}
-			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}">
+			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}" data-sort-value="{{formatted.from}} {{ formatted.callerIDName }}" >
 				<div class="top-line">{{#monsterNumberWrapper formatted.callerIDName}}{{/monsterNumberWrapper}}</div>
 				<div class="bottom-line">{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}</div>
 			</td>
 		{{else}}
-			<td class="select-line" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}">
+			<td class="select-line" data-filter-value="{{from}} {{formatted.from}} {{ formatted.callerIDName }}" data-sort-value="{{formatted.from}} {{ formatted.callerIDName }}">
 				{{#monsterNumberWrapper formatted.from}}{{/monsterNumberWrapper}}
 			</td>
 		{{/if}}
-		<td class="select-line" data-filter-value="{{to}} {{formatted.to}}">{{#monsterNumberWrapper formatted.to}}{{/monsterNumberWrapper}}</td>
+		<td class="select-line" data-filter-value="{{to}} {{formatted.to}}" data-sort-value="{{formatted.to}}">{{#monsterNumberWrapper formatted.to}}{{/monsterNumberWrapper}}</td>
 		<td class="duration select-line">{{formatted.duration}}</td>
 		<td class="actions">
 			<i class="fa fa-play-circle action-item play-vm"></i>
