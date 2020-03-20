@@ -16,7 +16,8 @@ define(function(require) {
 		appFlags: {
 			voicemails: {
 				maxRange: 31,
-				defaultRange: 1
+				defaultRange: 1,
+				minPhoneNumberLength: 7
 			}
 		},
 
@@ -534,33 +535,71 @@ define(function(require) {
 
 		formatMessagesData: function(voicemails, vmboxId) {
 			var self = this,
+				tryFormatPhoneNumber = function(value) {
+					var minPhoneNumberLength = self.appFlags.voicemails.minPhoneNumberLength,
+						prefixedPhoneNumber,
+						formattedPhoneNumber;
+
+					if (_.size(value) < minPhoneNumberLength) {
+						return {
+							isPhoneNumber: false,
+							value: value,
+							userFormat: value
+						};
+					}
+
+					prefixedPhoneNumber = _.head(value) === '+'
+						? value
+						: /^\d+$/.test(value)	// Prepend '+' if there are only numbers
+							? '+' + value
+							: value;
+					formattedPhoneNumber = monster.util.getFormatPhoneNumber(prefixedPhoneNumber);
+
+					return {
+						isPhoneNumber: formattedPhoneNumber.isValid,
+						value: formattedPhoneNumber.isValid
+							? formattedPhoneNumber.e164Number
+							: value,
+						userFormat: formattedPhoneNumber.isValid
+							? formattedPhoneNumber.userFormat
+							: value
+					};
+				},
+				formattedVoicemails = _.map(voicemails, function(vm) {
+					var to = vm.to.substr(0, vm.to.indexOf('@')),
+						from = vm.from.substr(0, vm.from.indexOf('@')),
+						callerIDName = _.get(vm, 'caller_id_name', ''),
+						formattedTo = tryFormatPhoneNumber(to),
+						formattedFrom = tryFormatPhoneNumber(from),
+						formattedCallerIDName = tryFormatPhoneNumber(callerIDName);
+
+					return _.merge({
+						formatted: {
+							to: formattedTo,
+							from: formattedFrom,
+							callerIDName: formattedCallerIDName,
+							duration: monster.util.friendlyTimer(vm.length / 1000),
+							uri: self.formatVMURI(vmboxId, vm.media_id),
+							callId: monster.util.getModbID(vm.call_id, vm.timestamp),
+							mediaId: vm.media_id,
+							showCallerIDName: formattedCallerIDName.value !== formattedFrom.value
+						}
+					}, vm);
+				}),
 				formattedData = {
-					voicemails: [],
+					voicemails: formattedVoicemails,
 					counts: {
-						newMessages: 0,
-						totalMessages: 0
+						newMessages: _.sumBy(voicemails, function(vm) {
+							return _
+								.chain(vm)
+								.get('folder')
+								.isEqual('new')
+								.toInteger()
+								.value();
+						}),
+						totalMessages: voicemails.length
 					}
 				};
-
-			_.each(voicemails, function(vm) {
-				vm.formatted = {};
-				vm.formatted.to = monster.util.formatPhoneNumber(vm.to.substr(0, vm.to.indexOf('@')));
-				vm.formatted.from = monster.util.formatPhoneNumber(vm.from.substr(0, vm.from.indexOf('@')));
-				vm.formatted.callerIDName = monster.util.formatPhoneNumber(vm.caller_id_name);
-				vm.formatted.duration = monster.util.friendlyTimer(vm.length / 1000);
-				vm.formatted.uri = self.formatVMURI(vmboxId, vm.media_id);
-				vm.formatted.callId = monster.util.getModbID(vm.call_id, vm.timestamp);
-				vm.formatted.mediaId = vm.media_id;
-				vm.formatted.showCallerIDName = vm.formatted.callerIDName !== vm.formatted.from;
-
-				formattedData.voicemails.push(vm);
-
-				if (vm.folder === 'new') {
-					formattedData.counts.newMessages++;
-				}
-			});
-
-			formattedData.counts.totalMessages = formattedData.voicemails.length;
 
 			return formattedData;
 		},
