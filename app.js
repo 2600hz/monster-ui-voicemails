@@ -543,7 +543,8 @@ define(function(require) {
 					if (_.size(value) < minPhoneNumberLength) {
 						return {
 							isPhoneNumber: false,
-							value: value
+							value: value,
+							userFormat: value
 						};
 					}
 
@@ -558,6 +559,9 @@ define(function(require) {
 						isPhoneNumber: formattedPhoneNumber.isValid,
 						value: formattedPhoneNumber.isValid
 							? formattedPhoneNumber.e164Number
+							: value,
+						userFormat: formattedPhoneNumber.isValid
+							? formattedPhoneNumber.userFormat
 							: value
 					};
 				},
