@@ -25,7 +25,7 @@
 			<div class="bottom-line">{{toFriendlyDate timestamp 'time'}}</div>
 		</td>
 		{{#if formatted.showCallerIDName}}
-			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from.value}} {{formatted.callerIDName.value}}" data-sort-value="{{formatted.from.value}} {{formatted.callerIDName.value}}" >
+			<td class="select-line no-padding" data-filter-value="{{from}} {{formatted.from.value}} {{formatted.callerIDName.value}} {{formatted.from.userFormat}} {{formatted.callerIDName.userFormat}}" data-sort-value="{{formatted.from.value}} {{formatted.callerIDName.value}}" >
 				<div class="top-line">
 				{{#if formatted.callerIDName.isPhoneNumber}}
 					{{#monsterNumberWrapper formatted.callerIDName.value}}{{/monsterNumberWrapper}}
@@ -42,7 +42,7 @@
 				</div>
 			</td>
 		{{else}}
-			<td class="select-line" data-filter-value="{{from}} {{formatted.from.value}} {{formatted.callerIDName.value}}" data-sort-value="{{formatted.from.value}} {{formatted.callerIDName.value}}">
+			<td class="select-line" data-filter-value="{{from}} {{formatted.from.value}} {{formatted.callerIDName.value}} {{formatted.from.userFormat}} {{formatted.callerIDName.userFormat}}" data-sort-value="{{formatted.from.value}} {{formatted.callerIDName.value}}">
 			{{#if formatted.from.isPhoneNumber}}
 				{{#monsterNumberWrapper formatted.from.value}}{{/monsterNumberWrapper}}
 			{{else}}
@@ -50,7 +50,7 @@
 			{{/if}}
 			</td>
 		{{/if}}
-		<td class="select-line" data-filter-value="{{to}} {{formatted.to.value}}" data-sort-value="{{formatted.to.value}}">
+		<td class="select-line" data-filter-value="{{to}} {{formatted.to.value}} {{formatted.to.userFormat}}" data-sort-value="{{formatted.to.value}}">
 		{{#if formatted.to.isPhoneNumber}}
 			{{#monsterNumberWrapper formatted.to.value}}{{/monsterNumberWrapper}}
 		{{else}}
