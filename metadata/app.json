@@ -15,14 +15,16 @@
 		},
 		"en-US": {
 			"label": "Voicemails",
-			"description": "This app allows you to quickly and easily manage the contents of your voicemail box. In addition, it allows you to access your voicemails remotely, as well as download, delete, retrieve, view CRD details and more. Your admins can filter by account, number, or voicemail box, search by date range, sort columns, and/or play and download voicemail media. Admins may select all voicemails in an account or voicemail box, bulk delete old voicemails by voicemail box or account, change voicemail statuses and/or copy voicemails to another voicemail box.",
-			"extended_description": "",
+			"description": "Voicemails allows you to quickly and easily manage the contents of your voicemail box. ",
+			"extended_description": "With Voicemails, access your voicemails remotely, take bulk actions, and move voicemails to other voicemail boxes as needed. In addition, your admins can filter voicemails by account, number, or voicemail box. Managing voicemails has never been easier!",
 			"features": [
-				"Move voicemail and change status",
-				"Play Voicemail",
-				"Download Voicemail",
-				"View voicemail details",
-				"Bulk status change"
+				"Access voicemails remotely",
+				"Listen to and download voicemails",
+				"View all voicemail details",
+				"Search by date range",
+				"Filter by status, date received, from number, target number and duration",
+				"View CDR details",
+				"Select single, multiple, or all (bulk) voicemails"
 			]
 		}
 	},
@@ -36,8 +38,8 @@
 	"license": "-",
 	"price": 0,
 	"screenshots": [
-		"PlayVoicemail.png",
-		"SelectedVoicemails.png"
+		"Voicemails1.png",
+		"Voicemails2.png"
 	],
 	"urls": {
 		"documentation": "{documentation_url}",
